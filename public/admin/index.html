@@ -5,9 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Vertex Capital Admin</title>
-    <!-- Use Decap CMS App bundle -->
-    <script src="https://unpkg.com/decap-cms-app@^3.0.0/dist/decap-cms-app.js"></script>
+    <script>
+      // Debug: log when Decap CMS starts loading
+      console.log('Admin page loading, looking for Decap CMS config at /admin/config.yml');
+    </script>
   </head>
   <body>
+    <div id="app"></div>
+    <script>
+      // Load Decap CMS configuration before the app script
+      window.CMS_CONFIG = {};
+      fetch('/admin/config.yml')
+        .then(response => {
+          if (!response.ok) throw new Error(`Failed to load config: ${response.status}`);
+          return response.text();
+        })
+        .then(yaml => {
+          console.log('Config loaded successfully');
+          window.CMS_CONFIG = yaml;
+        })
+        .catch(err => console.error('Config load error:', err));
+    </script>
+    <!-- Load Decap CMS App bundle -->
+    <script src="https://unpkg.com/decap-cms-app@^3.0.0/dist/decap-cms-app.js"></script>
+    <script>
+      // Log when CMS is initialized
+      window.addEventListener('load', () => {
+        console.log('Decap CMS app loaded');
+      });
+    </script>
   </body>
 </html>
