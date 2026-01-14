@@ -84,30 +84,8 @@
       });
 
       // Start debugging
-      addLog('Page loaded, starting Decap CMS debug...', 'info');
+      addLog('Page loaded, starting Decap CMS initialization...', 'info');
       addLog(`Current URL: ${window.location.href}`, 'info');
-      addLog(`Looking for config at: /admin/config.yml`, 'info');
-
-      // Check if config file exists
-      fetch('/admin/config.yml')
-        .then(response => {
-          if (response.ok) {
-            addLog(`✓ Config file found (status: ${response.status})`, 'success');
-            return response.text();
-          } else {
-            addLog(`✗ Config file not found (status: ${response.status})`, 'error');
-            return null;
-          }
-        })
-        .then(configText => {
-          if (configText) {
-            addLog(`✓ Config loaded (${configText.length} bytes)`, 'success');
-            addLog(`Config preview: ${configText.substring(0, 100)}...`, 'info');
-          }
-        })
-        .catch(err => {
-          addLog(`✗ Config fetch error: ${err.message}`, 'error');
-        });
 
       // Monitor Decap CMS loading
       addLog('Waiting for Decap CMS script to load...', 'warning');
