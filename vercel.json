@@ -2,6 +2,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
+    { "source": "/admin/config.yml", "destination": "/admin/config.yml" },
     { "source": "/admin", "destination": "/admin/index.html" },
     {
       "source": "/admin/(.*)",
