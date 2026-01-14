@@ -2,10 +2,9 @@ backend:
   name: github
   repo: Imethod1/vertex-capitalportifolio
   branch: main
-  auth_endpoint: https://vertex-capitalportfolio.vercel.app/api/auth
-  base_url: https://vertex-capitalportfolio.vercel.app
+  auth_endpoint: https://vertex-capitalportifolio.vercel.app/api/auth
+  base_url: https://vertex-capitalportifolio.vercel.app
   app_id: Ov23lifj7lCto8d0EHYT
-  app_secret: ${DECAP_CMS_GITHUB_APP_SECRET}
 
 media_folder: public/images
 public_folder: /images
