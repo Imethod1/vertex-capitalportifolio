@@ -4,7 +4,7 @@ backend:
   branch: main
   auth_endpoint: auth
   base_url: https://vertex-capital-portifolio.netlify.app
-  app_id: 3ca2c2ba13b849ce4e8f
+  app_id: Ov23lifj7lCto8d0EHYT
   app_secret: ${DECAP_CMS_GITHUB_APP_SECRET}
 
 media_folder: public/images
