@@ -5,34 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Vertex Capital Admin</title>
-    <script>
-      // Debug: log when Decap CMS starts loading
-      console.log('Admin page loading, looking for Decap CMS config at /admin/config.yml');
-    </script>
+    <style>
+      body {
+        font-family: monospace;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      #debug {
+        background: white;
+        border: 2px solid #ddd;
+        padding: 15px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+      .debug-line {
+        margin: 5px 0;
+        padding: 3px;
+        border-left: 3px solid #ccc;
+        padding-left: 10px;
+      }
+      .debug-line.error {
+        color: red;
+        border-left-color: red;
+        background: #ffe0e0;
+      }
+      .debug-line.success {
+        color: green;
+        border-left-color: green;
+        background: #e0ffe0;
+      }
+      .debug-line.info {
+        color: blue;
+        border-left-color: blue;
+      }
+      .debug-line.warning {
+        color: orange;
+        border-left-color: orange;
+        background: #fff5e0;
+      }
+      #app {
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
+    <h2>Vertex Capital Admin - Debugging</h2>
+    <div id="debug"></div>
     <div id="app"></div>
+
     <script>
-      // Load Decap CMS configuration before the app script
-      window.CMS_CONFIG = {};
+      // Debug logging system
+      const debugDiv = document.getElementById('debug');
+      const logs = [];
+
+      function addLog(message, type = 'info') {
+        const timestamp = new Date().toLocaleTimeString();
+        const entry = `[${timestamp}] ${message}`;
+        logs.push({ message: entry, type });
+        
+        const line = document.createElement('div');
+        line.className = `debug-line ${type}`;
+        line.textContent = entry;
+        debugDiv.appendChild(line);
+        debugDiv.scrollTop = debugDiv.scrollHeight;
+        
+        console.log(`[${type.toUpperCase()}]`, message);
+      }
+
+      // Global error handler
+      window.addEventListener('error', (e) => {
+        addLog(`ERROR: ${e.message} (${e.filename}:${e.lineno})`, 'error');
+      });
+
+      window.addEventListener('unhandledrejection', (e) => {
+        addLog(`PROMISE REJECTION: ${e.reason}`, 'error');
+      });
+
+      // Start debugging
+      addLog('Page loaded, starting Decap CMS debug...', 'info');
+      addLog(`Current URL: ${window.location.href}`, 'info');
+      addLog(`Looking for config at: /admin/config.yml`, 'info');
+
+      // Check if config file exists
       fetch('/admin/config.yml')
         .then(response => {
-          if (!response.ok) throw new Error(`Failed to load config: ${response.status}`);
-          return response.text();
+          if (response.ok) {
+            addLog(`✓ Config file found (status: ${response.status})`, 'success');
+            return response.text();
+          } else {
+            addLog(`✗ Config file not found (status: ${response.status})`, 'error');
+            return null;
+          }
         })
-        .then(yaml => {
-          console.log('Config loaded successfully');
-          window.CMS_CONFIG = yaml;
+        .then(configText => {
+          if (configText) {
+            addLog(`✓ Config loaded (${configText.length} bytes)`, 'success');
+            addLog(`Config preview: ${configText.substring(0, 100)}...`, 'info');
+          }
         })
-        .catch(err => console.error('Config load error:', err));
-    </script>
-    <!-- Load Decap CMS App bundle -->
-    <script src="https://unpkg.com/decap-cms-app@^3.0.0/dist/decap-cms-app.js"></script>
-    <script>
-      // Log when CMS is initialized
+        .catch(err => {
+          addLog(`✗ Config fetch error: ${err.message}`, 'error');
+        });
+
+      // Monitor Decap CMS loading
+      addLog('Waiting for Decap CMS script to load...', 'warning');
+
       window.addEventListener('load', () => {
-        console.log('Decap CMS app loaded');
+        addLog('Window load event fired', 'info');
+        
+        if (window.CMS) {
+          addLog('✓ Decap CMS object detected!', 'success');
+        } else {
+          addLog('✗ Decap CMS object NOT found', 'error');
+          addLog('Checking window properties...', 'warning');
+          const keys = Object.keys(window).filter(k => k.includes('CMS') || k.includes('cms'));
+          if (keys.length > 0) {
+            addLog(`Found related properties: ${keys.join(', ')}`, 'info');
+          }
+        }
       });
+
+      // Check script loading
+      const scriptCheck = setInterval(() => {
+        if (window.CMS) {
+          addLog('✓ CMS loaded via script tag', 'success');
+          clearInterval(scriptCheck);
+        }
+      }, 500);
+
+      // Timeout after 10 seconds
+      setTimeout(() => {
+        if (!window.CMS) {
+          addLog('✗ CMS did not load within 10 seconds', 'error');
+          clearInterval(scriptCheck);
+        }
+      }, 10000);
     </script>
+    
+    <!-- Load Decap CMS App bundle -->
+    <script 
+      src="https://unpkg.com/decap-cms-app@^3.0.0/dist/decap-cms-app.js"
+      onload="console.log('Script onload fired')"
+      onerror="console.error('Script load error')"
+    ></script>
   </body>
 </html>
