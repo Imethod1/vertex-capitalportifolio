@@ -299,9 +299,15 @@ const config = {
   ],
 };
 
-// Register the config with Decap CMS
+// Store config in window for Decap CMS to use
+window.CMS_CONFIG = config;
+
+// Wait for Decap CMS to be loaded
 if (window.CMS) {
-  CMS.init({ config });
+  console.log('Decap CMS is ready, registering config');
+  window.CMS.registerPreviewTemplate('portfolio', null);
 } else {
-  console.error('Decap CMS not loaded');
+  console.log('Waiting for Decap CMS to load...');
+  // CMS will automatically look for window.CMS_CONFIG
 }
+
