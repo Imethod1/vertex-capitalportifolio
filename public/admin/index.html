@@ -106,8 +106,7 @@
       });
 
       // Check script loading
-      const scriptCheck = setInterval(() => {imal config.yml - Provides a valid fallback if Decap CMS tries to load from file
-      Updated initialization - Uses CMS.registerConfig() which is the proper v3.0.0 API for injecting full config
+      const scriptCheck = setInterval(() => {
         if (window.CMS) {
           addLog('✓ CMS loaded via script tag', 'success');
           clearInterval(scriptCheck);
