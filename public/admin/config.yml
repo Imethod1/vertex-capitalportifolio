@@ -3,7 +3,7 @@ backend:
   repo: Imethod1/vertex-capitalportifolio
   branch: main
   auth_endpoint: /api/auth
-  base_url: https://vertex-capitalportfolio.vercel.app
+  base_url: https://vertex-capitalportifolio.vercel.app
   app_id: Ov23lifj7lCto8d0EHYT
   site_id: vertex-capitalportifolio.vercel.app
 

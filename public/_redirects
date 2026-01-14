@@ -1,2 +1,2 @@
-/auth    https://vertex-capitalportfolio.vercel.app/api/auth    200
+/auth    https://vertex-capitalportifolio.vercel.app/api/auth    200
 /admin/* /admin/index.html 200
