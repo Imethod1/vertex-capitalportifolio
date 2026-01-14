@@ -151,17 +151,18 @@
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
     
     <script>
-      // Initialize CMS with full config object
+      // Initialize CMS with full config object - Decap CMS v3.0.0 compliant
       function initializeCMS() {
         if (!window.CMS) {
           setTimeout(initializeCMS, 100);
           return;
         }
 
-        addLog('CMS ready, building config object...', 'success');
+        addLog('CMS ready, building v3.0.0 compliant config...', 'success');
         
-        // Full config object with all required properties
+        // Complete config object with ALL required properties for Decap CMS 3.0.0
         const cmsConfig = {
+          // Required: Backend configuration
           backend: {
             name: 'github',
             repo: 'Imethod1/vertex-capitalportifolio',
@@ -170,8 +171,20 @@
             base_url: 'https://vertex-capitalportfolio.vercel.app',
             app_id: 'Ov23lifj7lCto8d0EHYT'
           },
+          
+          // Required: Media folder (where uploads go)
           media_folder: 'public/images',
+          
+          // Required: Public folder (relative path from browser)
           public_folder: '/images',
+          
+          // Required: Media library config
+          media_library: {
+            name: 'uploadcare',
+            config: {}
+          },
+          
+          // Required: Collections
           collections: [
             {
               name: 'portfolio',
@@ -238,12 +251,19 @@
         };
 
         try {
-          addLog(`Collections defined: ${cmsConfig.collections.map(c => c.name).join(', ')}`, 'info');
+          // Log config validation details
+          addLog(`Config structure:`, 'info');
+          addLog(`  - backend: ${cmsConfig.backend ? '✓' : '✗'}`, 'info');
+          addLog(`  - media_folder: ${cmsConfig.media_folder ? '✓' : '✗'}`, 'info');
+          addLog(`  - public_folder: ${cmsConfig.public_folder ? '✓' : '✓'}`, 'info');
+          addLog(`  - media_library: ${cmsConfig.media_library ? '✓' : '✗'}`, 'info');
+          addLog(`  - collections: ${cmsConfig.collections ? cmsConfig.collections.length + ' defined' : '✗'}`, 'info');
+          
           window.CMS.init({ config: cmsConfig });
-          addLog('✓ CMS initialized successfully!', 'success');
+          addLog('✓ CMS initialized successfully with v3.0.0 config!', 'success');
         } catch (err) {
           addLog(`✗ CMS init error: ${err.message}`, 'error');
-          console.error(err);
+          console.error('Full error:', err);
         }
       }
 
