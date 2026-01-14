@@ -144,11 +144,23 @@
       }, 10000);
     </script>
     
-    <!-- Load Decap CMS App bundle -->
-    <script 
-      src="https://unpkg.com/decap-cms-app@^3.0.0/dist/decap-cms-app.js"
-      onload="console.log('Script onload fired')"
-      onerror="console.error('Script load error')"
-    ></script>
+    <!-- Try different Decap CMS sources -->
+    <script src="https://cdn.jsdelivr.net/npm/decap-cms-app@^3.0.0"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        addLog('DOMContentLoaded fired', 'info');
+        if (window.CMS) {
+          addLog('✓ CMS available after DOM load', 'success');
+        } else {
+          addLog('Attempting to load CMS with fallback script...', 'warning');
+          // Try alternate script if main failed
+          const script = document.createElement('script');
+          script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+          script.onload = () => addLog('Fallback script loaded', 'success');
+          script.onerror = () => addLog('Fallback script also failed', 'error');
+          document.head.appendChild(script);
+        }
+      });
+    </script>
   </body>
 </html>
