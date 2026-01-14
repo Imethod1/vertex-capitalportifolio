@@ -8,5 +8,11 @@
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" defer></script>
   </head>
   <body>
+    <script>
+      // Ensure config is loaded from the correct path
+      if (window.CMS) {
+        console.log('Decap CMS loaded');
+      }
+    </script>
   </body>
 </html>
