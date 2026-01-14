@@ -144,11 +144,37 @@
       }, 10000);
     </script>
     
+    <!-- Load YAML parser first -->
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.js"></script>
+    
     <!-- Try different Decap CMS sources -->
     <script src="https://cdn.jsdelivr.net/npm/decap-cms-app@^3.0.0"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         addLog('DOMContentLoaded fired', 'info');
+        
+        // Load and parse config
+        fetch('/admin/config.yml')
+          .then(r => r.text())
+          .then(yaml => {
+            try {
+              const config = jsyaml.load(yaml);
+              addLog('✓ Config parsed as YAML', 'success');
+              
+              // Register with CMS if available
+              if (window.CMS) {
+                addLog('✓ Registering config with CMS', 'success');
+                window.CMS.init({ config });
+                addLog('✓ CMS initialized!', 'success');
+              } else {
+                addLog('CMS not ready, will retry...', 'warning');
+              }
+            } catch (e) {
+              addLog(`✗ YAML parse error: ${e.message}`, 'error');
+            }
+          })
+          .catch(e => addLog(`✗ Config fetch failed: ${e.message}`, 'error'));
+        
         if (window.CMS) {
           addLog('✓ CMS available after DOM load', 'success');
         } else {
@@ -156,7 +182,21 @@
           // Try alternate script if main failed
           const script = document.createElement('script');
           script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
-          script.onload = () => addLog('Fallback script loaded', 'success');
+          script.onload = () => {
+            addLog('Fallback script loaded', 'success');
+            // Retry config registration
+            setTimeout(() => {
+              if (window.CMS && window.jsyaml) {
+                fetch('/admin/config.yml')
+                  .then(r => r.text())
+                  .then(yaml => {
+                    const config = jsyaml.load(yaml);
+                    window.CMS.init({ config });
+                    addLog('✓ CMS initialized via fallback!', 'success');
+                  });
+              }
+            }, 500);
+          };
           script.onerror = () => addLog('Fallback script also failed', 'error');
           document.head.appendChild(script);
         }
