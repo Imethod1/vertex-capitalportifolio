@@ -106,7 +106,8 @@
       });
 
       // Check script loading
-      const scriptCheck = setInterval(() => {
+      const scriptCheck = setInterval(() => {imal config.yml - Provides a valid fallback if Decap CMS tries to load from file
+      Updated initialization - Uses CMS.registerConfig() which is the proper v3.0.0 API for injecting full config
         if (window.CMS) {
           addLog('✓ CMS loaded via script tag', 'success');
           clearInterval(scriptCheck);
@@ -122,137 +123,20 @@
       }, 10000);
     </script>
     
-    <!-- Load YAML parser -->
-    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.js"></script>
-    
     <!-- Load Decap CMS from jsDelivr CDN (stable) -->
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
     
     <script>
-      // Initialize CMS with full config object - Decap CMS v3.0.0 compliant
+      // Decap CMS v3.0.0 will auto-load /admin/config.yml
+      // This initialization just monitors the loading process
       function initializeCMS() {
         if (!window.CMS) {
           setTimeout(initializeCMS, 100);
           return;
         }
 
-        addLog('CMS ready, registering config...', 'success');
-        
-        // Complete config object with ALL required properties for Decap CMS 3.0.0
-        const cmsConfig = {
-          // Required: Backend configuration
-          backend: {
-            name: 'github',
-            repo: 'Imethod1/vertex-capitalportifolio',
-            branch: 'main',
-            auth_endpoint: '/api/auth',
-            base_url: 'https://vertex-capitalportfolio.vercel.app',
-            app_id: 'Ov23lifj7lCto8d0EHYT',
-            site_id: 'vertex-capitalportifolio.vercel.app'
-          },
-          
-          // Required: Media folder (where uploads go)
-          media_folder: 'public/images',
-          
-          // Required: Public folder (relative path from browser)
-          public_folder: '/images',
-          
-          // Required: Media library config
-          media_library: {
-            name: 'uploadcare',
-            config: {}
-          },
-          
-          // Required: Collections
-          collections: [
-            {
-              name: 'portfolio',
-              label: 'Portfolio Data',
-              files: [{
-                file: 'src/data/portfolio.json',
-                label: 'Portfolio Data',
-                name: 'portfolio',
-                format: 'json',
-                fields: [
-                  { label: 'Date', name: 'date', widget: 'datetime', format: 'YYYY-MM-DD' },
-                  { label: 'Total Value (TZS)', name: 'totalValue', widget: 'number' },
-                  {
-                    label: 'Allocations',
-                    name: 'allocations',
-                    widget: 'list',
-                    fields: [
-                      { label: 'Asset Class', name: 'allocationClass', widget: 'select', options: ['Fixed Income', 'Domestic Equities', 'Regional (EAC/SADC) Equities', 'Cash & Cash Equivalents'] },
-                      { label: 'Target %', name: 'targetPercent', widget: 'number' },
-                      { label: 'Current %', name: 'currentPercent', widget: 'number' }
-                    ]
-                  }
-                ]
-              }]
-            },
-            {
-              name: 'risk_metrics',
-              label: 'Risk Metrics',
-              files: [{
-                file: 'src/data/riskMetrics.json',
-                label: 'Risk Metrics',
-                name: 'risk_metrics',
-                format: 'json',
-                fields: [{
-                  label: 'Metrics',
-                  name: 'metrics',
-                  widget: 'list',
-                  fields: [
-                    { label: 'Metric Name', name: 'metricName', widget: 'string' },
-                    { label: 'Current Value', name: 'currentValue', widget: 'string' },
-                    { label: 'Status', name: 'status', widget: 'select', options: ['Compliant', 'Warning', 'Breach'] }
-                  ]
-                }]
-              }]
-            },
-            {
-              name: 'settings',
-              label: 'Portfolio Settings',
-              files: [{
-                file: 'src/data/settings.json',
-                label: 'Settings',
-                name: 'settings',
-                format: 'json',
-                fields: [
-                  { label: 'Portfolio Name', name: 'portfolioName', widget: 'string' },
-                  { label: 'Portfolio Manager', name: 'portfolioManager', widget: 'string' },
-                  { label: 'Last Updated', name: 'lastUpdated', widget: 'datetime', format: 'YYYY-MM-DD HH:mm' },
-                  { label: 'Benchmark Index', name: 'benchmark', widget: 'string' },
-                  { label: 'YTD Performance %', name: 'ytdPerformance', widget: 'number' }
-                ]
-              }]
-            }
-          ]
-        };
-
-        try {
-          // Log config validation details
-          addLog(`Config structure:`, 'info');
-          addLog(`  - backend: ${cmsConfig.backend ? '✓' : '✗'}`, 'info');
-          addLog(`  - media_folder: ${cmsConfig.media_folder ? '✓' : '✗'}`, 'info');
-          addLog(`  - public_folder: ${cmsConfig.public_folder ? '✓' : '✓'}`, 'info');
-          addLog(`  - media_library: ${cmsConfig.media_library ? '✓' : '✗'}`, 'info');
-          addLog(`  - collections: ${cmsConfig.collections ? cmsConfig.collections.length + ' defined' : '✗'}`, 'info');
-          
-          // Decap CMS v3.0.0: Use registerConfig to inject config before init
-          if (window.CMS && window.CMS.registerConfig) {
-            addLog('Using registerConfig pattern...', 'info');
-            window.CMS.registerConfig(cmsConfig);
-          } else {
-            // Fallback to init() pattern
-            addLog('Using init pattern...', 'info');
-            window.CMS.init({ config: cmsConfig });
-          }
-          
-          addLog('✓ CMS configured and initialized!', 'success');
-        } catch (err) {
-          addLog(`✗ CMS init error: ${err.message}`, 'error');
-          console.error('Full error:', err);
-        }
+        addLog('✓ Decap CMS loaded successfully', 'success');
+        addLog('Using config from /admin/config.yml', 'info');
       }
 
       // Start initialization after page loads
