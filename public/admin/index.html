@@ -144,63 +144,42 @@
       }, 10000);
     </script>
     
-    <!-- Load YAML parser first -->
+    <!-- Load YAML parser -->
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.js"></script>
     
-    <!-- Try different Decap CMS sources -->
-    <script src="https://cdn.jsdelivr.net/npm/decap-cms-app@^3.0.0"></script>
+    <!-- Load Decap CMS from jsDelivr CDN (stable) -->
+    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
+    
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        addLog('DOMContentLoaded fired', 'info');
+      // Initialize when both YAML parser and CMS are loaded
+      function initializeCMS() {
+        if (!window.CMS) {
+          setTimeout(initializeCMS, 100);
+          return;
+        }
+
+        addLog('CMS ready, loading config...', 'success');
         
-        // Load and parse config
         fetch('/admin/config.yml')
           .then(r => r.text())
           .then(yaml => {
-            try {
-              const config = jsyaml.load(yaml);
-              addLog('✓ Config parsed as YAML', 'success');
-              
-              // Register with CMS if available
-              if (window.CMS) {
-                addLog('✓ Registering config with CMS', 'success');
-                window.CMS.init({ config });
-                addLog('✓ CMS initialized!', 'success');
-              } else {
-                addLog('CMS not ready, will retry...', 'warning');
-              }
-            } catch (e) {
-              addLog(`✗ YAML parse error: ${e.message}`, 'error');
+            const config = jsyaml.load(yaml);
+            addLog(`Config parsed: ${JSON.stringify(config).substring(0, 100)}...`, 'info');
+            
+            if (config.collections) {
+              addLog(`Collections: ${config.collections.map(c => c.name).join(', ')}`, 'info');
             }
+            
+            window.CMS.init({ config });
+            addLog('✓ CMS initialized successfully!', 'success');
           })
-          .catch(e => addLog(`✗ Config fetch failed: ${e.message}`, 'error'));
-        
-        if (window.CMS) {
-          addLog('✓ CMS available after DOM load', 'success');
-        } else {
-          addLog('Attempting to load CMS with fallback script...', 'warning');
-          // Try alternate script if main failed
-          const script = document.createElement('script');
-          script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
-          script.onload = () => {
-            addLog('Fallback script loaded', 'success');
-            // Retry config registration
-            setTimeout(() => {
-              if (window.CMS && window.jsyaml) {
-                fetch('/admin/config.yml')
-                  .then(r => r.text())
-                  .then(yaml => {
-                    const config = jsyaml.load(yaml);
-                    window.CMS.init({ config });
-                    addLog('✓ CMS initialized via fallback!', 'success');
-                  });
-              }
-            }, 500);
-          };
-          script.onerror = () => addLog('Fallback script also failed', 'error');
-          document.head.appendChild(script);
-        }
-      });
+          .catch(e => {
+            addLog(`Error: ${e.message}`, 'error');
+          });
+      }
+
+      // Start initialization after page loads
+      window.addEventListener('load', initializeCMS);
     </script>
   </body>
 </html>
