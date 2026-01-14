@@ -151,17 +151,17 @@
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
     
     <script>
-      // Initialize with programmatic collections (bypass YAML parsing issues)
+      // Initialize CMS with full config object
       function initializeCMS() {
         if (!window.CMS) {
           setTimeout(initializeCMS, 100);
           return;
         }
 
-        addLog('CMS ready, registering collections programmatically...', 'success');
+        addLog('CMS ready, building config object...', 'success');
         
-        // Minimal backend config (no collections in config)
-        const minimalConfig = {
+        // Full config object with all required properties
+        const cmsConfig = {
           backend: {
             name: 'github',
             repo: 'Imethod1/vertex-capitalportifolio',
@@ -171,86 +171,80 @@
             app_id: 'Ov23lifj7lCto8d0EHYT'
           },
           media_folder: 'public/images',
-          public_folder: '/images'
-        };
-
-        // Register collections individually
-        const collections = [
-          {
-            name: 'portfolio',
-            label: 'Portfolio Data',
-            files: [{
-              file: 'src/data/portfolio.json',
-              label: 'Portfolio Data',
+          public_folder: '/images',
+          collections: [
+            {
               name: 'portfolio',
-              format: 'json',
-              fields: [
-                { label: 'Date', name: 'date', widget: 'datetime', format: 'YYYY-MM-DD' },
-                { label: 'Total Value (TZS)', name: 'totalValue', widget: 'number' },
-                {
-                  label: 'Allocations',
-                  name: 'allocations',
-                  widget: 'list',
-                  fields: [
-                    { label: 'Asset Class', name: 'allocationClass', widget: 'select', options: ['Fixed Income', 'Domestic Equities', 'Regional (EAC/SADC) Equities', 'Cash & Cash Equivalents'] },
-                    { label: 'Target %', name: 'targetPercent', widget: 'number' },
-                    { label: 'Current %', name: 'currentPercent', widget: 'number' }
-                  ]
-                }
-              ]
-            }]
-          },
-          {
-            name: 'risk_metrics',
-            label: 'Risk Metrics',
-            files: [{
-              file: 'src/data/riskMetrics.json',
-              label: 'Risk Metrics',
-              name: 'risk_metrics',
-              format: 'json',
-              fields: [{
-                label: 'Metrics',
-                name: 'metrics',
-                widget: 'list',
+              label: 'Portfolio Data',
+              files: [{
+                file: 'src/data/portfolio.json',
+                label: 'Portfolio Data',
+                name: 'portfolio',
+                format: 'json',
                 fields: [
-                  { label: 'Metric Name', name: 'metricName', widget: 'string' },
-                  { label: 'Current Value', name: 'currentValue', widget: 'string' },
-                  { label: 'Status', name: 'status', widget: 'select', options: ['Compliant', 'Warning', 'Breach'] }
+                  { label: 'Date', name: 'date', widget: 'datetime', format: 'YYYY-MM-DD' },
+                  { label: 'Total Value (TZS)', name: 'totalValue', widget: 'number' },
+                  {
+                    label: 'Allocations',
+                    name: 'allocations',
+                    widget: 'list',
+                    fields: [
+                      { label: 'Asset Class', name: 'allocationClass', widget: 'select', options: ['Fixed Income', 'Domestic Equities', 'Regional (EAC/SADC) Equities', 'Cash & Cash Equivalents'] },
+                      { label: 'Target %', name: 'targetPercent', widget: 'number' },
+                      { label: 'Current %', name: 'currentPercent', widget: 'number' }
+                    ]
+                  }
                 ]
               }]
-            }]
-          },
-          {
-            name: 'settings',
-            label: 'Portfolio Settings',
-            files: [{
-              file: 'src/data/settings.json',
-              label: 'Settings',
+            },
+            {
+              name: 'risk_metrics',
+              label: 'Risk Metrics',
+              files: [{
+                file: 'src/data/riskMetrics.json',
+                label: 'Risk Metrics',
+                name: 'risk_metrics',
+                format: 'json',
+                fields: [{
+                  label: 'Metrics',
+                  name: 'metrics',
+                  widget: 'list',
+                  fields: [
+                    { label: 'Metric Name', name: 'metricName', widget: 'string' },
+                    { label: 'Current Value', name: 'currentValue', widget: 'string' },
+                    { label: 'Status', name: 'status', widget: 'select', options: ['Compliant', 'Warning', 'Breach'] }
+                  ]
+                }]
+              }]
+            },
+            {
               name: 'settings',
-              format: 'json',
-              fields: [
-                { label: 'Portfolio Name', name: 'portfolioName', widget: 'string' },
-                { label: 'Portfolio Manager', name: 'portfolioManager', widget: 'string' },
-                { label: 'Last Updated', name: 'lastUpdated', widget: 'datetime', format: 'YYYY-MM-DD HH:mm' },
-                { label: 'Benchmark Index', name: 'benchmark', widget: 'string' },
-                { label: 'YTD Performance %', name: 'ytdPerformance', widget: 'number' }
-              ]
-            }]
-          }
-        ];
+              label: 'Portfolio Settings',
+              files: [{
+                file: 'src/data/settings.json',
+                label: 'Settings',
+                name: 'settings',
+                format: 'json',
+                fields: [
+                  { label: 'Portfolio Name', name: 'portfolioName', widget: 'string' },
+                  { label: 'Portfolio Manager', name: 'portfolioManager', widget: 'string' },
+                  { label: 'Last Updated', name: 'lastUpdated', widget: 'datetime', format: 'YYYY-MM-DD HH:mm' },
+                  { label: 'Benchmark Index', name: 'benchmark', widget: 'string' },
+                  { label: 'YTD Performance %', name: 'ytdPerformance', widget: 'number' }
+                ]
+              }]
+            }
+          ]
+        };
 
-        collections.forEach(collection => {
-          try {
-            window.CMS.registerCollection(collection);
-            addLog(`✓ Registered collection: ${collection.name}`, 'success');
-          } catch (err) {
-            addLog(`✗ Error registering ${collection.name}: ${err.message}`, 'error');
-          }
-        });
-
-        // Initialize with minimal backend config only
-        window.CMS.init({ config: minimalConfig });
-        addLog('✓ CMS initialized with programmatic collections!', 'success');
+        try {
+          addLog(`Collections defined: ${cmsConfig.collections.map(c => c.name).join(', ')}`, 'info');
+          window.CMS.init({ config: cmsConfig });
+          addLog('✓ CMS initialized successfully!', 'success');
+        } catch (err) {
+          addLog(`✗ CMS init error: ${err.message}`, 'error');
+          console.error(err);
+        }
       }
 
       // Start initialization after page loads
