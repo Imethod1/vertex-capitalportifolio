@@ -126,13 +126,34 @@
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
     
     <script>
-      // Monitor initialization
+      // Monitor initialization and debug config loading
       function initializeCMS() {
         if (!window.CMS) {
           setTimeout(initializeCMS, 100);
           return;
         }
         addLog('✓ Decap CMS loaded and config.yml loaded', 'success');
+        
+        // Explicit debug: fetch config.yml and log the response
+        fetch('/admin/config.yml')
+          .then(response => {
+            addLog(`Fetch /admin/config.yml: status=${response.status}`, 'info');
+            addLog(`Content-Type: ${response.headers.get('content-type')}`, 'info');
+            addLog(`Content-Length: ${response.headers.get('content-length')}`, 'info');
+            
+            if (response.status === 200) {
+              return response.text().then(text => {
+                addLog(`✓ Config file received (${text.length} bytes)`, 'success');
+                addLog(`First 100 chars: ${text.substring(0, 100)}...`, 'info');
+              });
+            } else {
+              addLog(`✗ Config fetch failed: HTTP ${response.status}`, 'error');
+              throw new Error(`HTTP ${response.status}`);
+            }
+          })
+          .catch(err => {
+            addLog(`✗ Fetch error: ${err.message}`, 'error');
+          });
       }
 
       window.addEventListener('load', initializeCMS);
