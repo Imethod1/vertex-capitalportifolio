@@ -127,19 +127,49 @@
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
     
     <script>
-      // Decap CMS v3.0.0 will auto-load /admin/config.yml
-      // This initialization just monitors the loading process
-      function initializeCMS() {
+      // Load JSON config and initialize Decap CMS
+      async function initializeCMS() {
         if (!window.CMS) {
           setTimeout(initializeCMS, 100);
           return;
         }
 
-        addLog('✓ Decap CMS loaded successfully', 'success');
-        addLog('Using config from /admin/config.yml', 'info');
+        try {
+          addLog('Loading config from /admin/config.json...', 'info');
+          
+          // Fetch JSON config
+          const response = await fetch('/admin/config.json');
+          if (!response.ok) {
+            throw new Error(`Failed to load config: ${response.status}`);
+          }
+          
+          const config = await response.json();
+          addLog(`✓ Config loaded successfully (${Object.keys(config).length} properties)`, 'success');
+          
+          // Validate config has all required properties
+          const required = ['backend', 'media_folder', 'public_folder', 'media_library', 'collections'];
+          const missing = required.filter(prop => !config[prop]);
+          
+          if (missing.length > 0) {
+            throw new Error(`Missing required properties: ${missing.join(', ')}`);
+          }
+          
+          addLog(`Registering ${config.collections.length} collections...`, 'info');
+          config.collections.forEach(col => {
+            addLog(`  - ${col.name} (${col.files?.length || 0} files)`, 'info');
+          });
+          
+          // Register config with Decap CMS
+          window.CMS.init({ config });
+          addLog('✓ Decap CMS initialized with JSON config!', 'success');
+          
+        } catch (err) {
+          addLog(`✗ Init error: ${err.message}`, 'error');
+          console.error('Full error:', err);
+        }
       }
 
-      // Start initialization after page loads
+      // Start after CMS library loads
       window.addEventListener('load', initializeCMS);
     </script>
   </body>
