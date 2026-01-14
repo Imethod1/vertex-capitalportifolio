@@ -16,7 +16,9 @@
   "license": "ISC",
   "description": "Portfolio Monitoring & Progress Logs System for Vertex Capital",
   "dependencies": {
+    "@vercel/node": "^5.5.19",
     "decap-cms-app": "^3.10.0",
+    "node-fetch": "^3.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.0"
