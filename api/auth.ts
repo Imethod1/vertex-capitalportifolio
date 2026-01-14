@@ -1,7 +1,4 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
-import fetch from 'node-fetch';
-
-export default async (req: VercelRequest, res: VercelResponse) => {
+export default async (req, res) => {
   const { code } = req.query;
 
   if (!code) {
@@ -26,7 +23,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
       }),
     });
 
-    const tokenData: any = await tokenResponse.json();
+    const tokenData = await tokenResponse.json();
 
     if (tokenData.error) {
       return res.status(400).json({ error: tokenData.error_description });
@@ -38,7 +35,8 @@ export default async (req: VercelRequest, res: VercelResponse) => {
       token: tokenData.access_token,
       provider: 'github',
     });
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
