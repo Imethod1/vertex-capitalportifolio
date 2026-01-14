@@ -164,7 +164,7 @@ const Page7Compliance: React.FC = () => {
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
           <h3 className="font-semibold text-blue-900 mb-3">📋 How to Update Compliance Data</h3>
           <ul className="text-sm text-blue-800 space-y-2">
-            <li>• Go to <strong>https://vertex-capital-portifolio.netlify.app/admin</strong></li>
+            <li>• Go to <strong>https://vertex-capitalportfolio.vercel.app/admin</strong></li>
             <li>• Login with your GitHub credentials</li>
             <li>• Click "Compliance Data" and update areas/breach status</li>
             <li>• System automatically validates against IPS limits</li>

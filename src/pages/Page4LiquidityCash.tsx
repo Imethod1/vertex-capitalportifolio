@@ -163,7 +163,7 @@ const Page4LiquidityCash: React.FC = () => {
           <div className="bg-green-50 border border-green-200 rounded-lg p-6">
             <h3 className="font-semibold text-green-900 mb-3">📋 How to Update Liquidity Data</h3>
             <ul className="text-sm text-green-800 space-y-2">
-              <li>• Go to <strong>https://vertex-capital-portifolio.netlify.app/admin</strong></li>
+              <li>• Go to <strong>https://vertex-capitalportfolio.vercel.app/admin</strong></li>
               <li>• Login with your GitHub credentials</li>
               <li>• Click "Liquidity" and update cash positions</li>
               <li>• Changes will auto-rebuild within 1-2 minutes</li>
