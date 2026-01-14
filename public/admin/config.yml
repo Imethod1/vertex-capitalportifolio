@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: https://github.com/Imethod1/Vertex-Capital-Portfolio.git
-  base_url: https://YOUR_NETLIFY_SITE.netlify.app
+  base_url: https://vertex-capital-portifolio.netlify.app/
   auth_endpoint: auth
   
 media_folder: public/images
