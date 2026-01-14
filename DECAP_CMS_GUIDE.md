@@ -4,7 +4,7 @@
 Decap CMS provides a secure, admin-only interface to manage all portfolio data. The public React app displays this data in read-only mode, while authenticated users can edit data through the CMS.
 
 ## Access Admin Panel
-**URL:** https://vertex-capital-portfolio.vercel.app/admin/
+**URL:** https://vertex-capitalportfolio.vercel.app/admin/
 
 ## Authentication
 1. Click "Login with GitHub" on the admin panel
@@ -117,4 +117,4 @@ For issues accessing the admin panel or editing data:
 
 **Last Updated:** January 14, 2026  
 **Portfolio:** Vertex Capital Investment Portfolio  
-**Admin URL:** https://vertex-capital-portfolio.vercel.app/admin/
+**Admin URL:** https://vertex-capitalportfolio.vercel.app/admin/

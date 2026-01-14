@@ -17,7 +17,7 @@ Your admin/CMS backend is now configured to use **Vercel** instead of Netlify.
 - ✅ Uses Vercel Functions (4 hours CPU/month free, no pause)
 - ✅ Direct GitHub OAuth via `/api/auth` endpoint
 - ✅ Single platform for frontend + admin backend
-- ✅ Same domain: `vertex-capital-portfolio.vercel.app`
+- ✅ Same domain: `vertex-capitalportfolio.vercel.app`
 
 ---
 
@@ -49,7 +49,7 @@ Your admin/CMS backend is now configured to use **Vercel** instead of Netlify.
 
 ### Step 3: Test the Admin Panel
 
-1. Open: `https://vertex-capital-portfolio.vercel.app/admin`
+1. Open: `https://vertex-capitalportfolio.vercel.app/admin`
 2. Click **"Login with GitHub"**
 3. Authorize the app
 4. You should see the portfolio editor ✅
@@ -71,7 +71,7 @@ Your admin/CMS backend is now configured to use **Vercel** instead of Netlify.
 
 ## API Endpoint Details
 
-**Auth Endpoint:** `https://vertex-capital-portfolio.vercel.app/api/auth`
+**Auth Endpoint:** `https://vertex-capitalportfolio.vercel.app/api/auth`
 
 This endpoint:
 1. Receives GitHub OAuth code from Decap CMS
@@ -95,7 +95,7 @@ Vercel automatically handles:
 ### "Login with GitHub fails"
 - Confirm GitHub app OAuth secret matches in Vercel
 - Check that app is authorized for your repo
-- Verify GitHub app redirect URL is set to `https://vertex-capital-portfolio.vercel.app/admin`
+- Verify GitHub app redirect URL is set to `https://vertex-capitalportfolio.vercel.app/api/auth`
 
 ### "Changes not syncing to GitHub"
 - Ensure Git Gateway is still enabled in GitHub (app settings)
