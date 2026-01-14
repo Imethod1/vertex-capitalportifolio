@@ -126,6 +126,32 @@
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
     
     <script>
+      // Intercept all fetch requests to see what Decap is requesting
+      const originalFetch = window.fetch;
+      window.fetch = function(...args) {
+        const url = args[0];
+        const options = args[1] || {};
+        
+        // Log all config.yml-related requests
+        if (typeof url === 'string' && (url.includes('config.yml') || url.includes('config'))) {
+          addLog(`FETCH REQUEST: ${url}`, 'warning');
+          addLog(`  Method: ${options.method || 'GET'}`, 'info');
+          addLog(`  Headers: ${JSON.stringify(options.headers || {})}`, 'info');
+        }
+        
+        return originalFetch.apply(this, args).then(response => {
+          if (typeof url === 'string' && (url.includes('config.yml') || url.includes('config'))) {
+            addLog(`FETCH RESPONSE: ${url} → HTTP ${response.status}`, 'info');
+          }
+          return response;
+        }).catch(err => {
+          if (typeof url === 'string' && (url.includes('config.yml') || url.includes('config'))) {
+            addLog(`FETCH ERROR: ${url} → ${err.message}`, 'error');
+          }
+          throw err;
+        });
+      };
+
       // Monitor initialization and debug config loading
       function initializeCMS() {
         if (!window.CMS) {
