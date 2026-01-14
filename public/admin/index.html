@@ -136,7 +136,7 @@
           return;
         }
 
-        addLog('CMS ready, building v3.0.0 compliant config...', 'success');
+        addLog('CMS ready, registering config...', 'success');
         
         // Complete config object with ALL required properties for Decap CMS 3.0.0
         const cmsConfig = {
@@ -238,8 +238,17 @@
           addLog(`  - media_library: ${cmsConfig.media_library ? '✓' : '✗'}`, 'info');
           addLog(`  - collections: ${cmsConfig.collections ? cmsConfig.collections.length + ' defined' : '✗'}`, 'info');
           
-          window.CMS.init({ config: cmsConfig });
-          addLog('✓ CMS initialized successfully with v3.0.0 config!', 'success');
+          // Decap CMS v3.0.0: Use registerConfig to inject config before init
+          if (window.CMS && window.CMS.registerConfig) {
+            addLog('Using registerConfig pattern...', 'info');
+            window.CMS.registerConfig(cmsConfig);
+          } else {
+            // Fallback to init() pattern
+            addLog('Using init pattern...', 'info');
+            window.CMS.init({ config: cmsConfig });
+          }
+          
+          addLog('✓ CMS configured and initialized!', 'success');
         } catch (err) {
           addLog(`✗ CMS init error: ${err.message}`, 'error');
           console.error('Full error:', err);
