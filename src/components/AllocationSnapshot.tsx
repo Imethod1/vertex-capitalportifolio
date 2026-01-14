@@ -13,9 +13,9 @@ export const AllocationSnapshot: React.FC<AllocationSnapshotProps> = ({ allocati
     if (field === 'rebalancingRequired') {
       updated[index][field] = value as boolean;
     } else if (field === 'current' || field === 'target') {
-      const numValue = typeof value === 'string' ? parseFloat(value) || 0 : value;
+      const numValue = typeof value === 'string' ? parseFloat(value) || 0 : (typeof value === 'number' ? value : 0);
       updated[index][field] = numValue;
-      updated[index].deviation = numValue - updated[index].target;
+      updated[index].deviation = numValue - (field === 'target' ? updated[index].target : updated[index].current);
     } else {
       updated[index][field] = value as any;
     }

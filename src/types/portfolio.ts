@@ -110,3 +110,23 @@ export interface IPSConstraints {
   singleSectorLimit: number; // 25%
   regionalAllocationLimit: number; // 10%
 }
+
+export interface AllocationSnapshot {
+  assetClass: AssetClass;
+  target: number;
+  current: number;
+  deviation: number;
+  rebalancingRequired: boolean;
+  notes: string;
+}
+
+export interface PortfolioState {
+  date: string;
+  allocations: PortfolioAllocation[];
+  securities: Security[];
+  riskMetrics: RiskMetric[];
+  liquidityItems: LiquidityItem[];
+  tacticalAdjustments: TacticalAdjustment[];
+  performanceMetrics: PerformanceMetric[];
+  complianceChecks: ComplianceCheck[];
+}

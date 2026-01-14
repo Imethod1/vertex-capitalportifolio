@@ -14,9 +14,9 @@ export const SecurityExposure: React.FC<SecurityExposureProps> = ({ securities, 
     const security = updated[index];
     
     if (field === 'currentWeight' || field === 'targetWeight') {
-      const numValue = typeof value === 'string' ? parseFloat(value) || 0 : value;
+      const numValue = typeof value === 'string' ? parseFloat(value) || 0 : (typeof value === 'number' ? value : 0);
       security[field] = numValue;
-      security.deviation = numValue - security.targetWeight;
+      security.deviation = numValue - (field === 'targetWeight' ? security.targetWeight : security.currentWeight);
     } else if (typeof value === 'string') {
       (security[field] as any) = value;
     } else {
