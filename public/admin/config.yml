@@ -1,9 +1,9 @@
 backend:
   name: github
-  repo: Imethod1/Vertex-Capital-Portfolio
+  repo: Imethod1/vertex-capitalportifolio
   branch: main
-  auth_endpoint: auth
-  base_url: https://vertex-capital-portifolio.netlify.app
+  auth_endpoint: /api/auth
+  base_url: ${VERCEL_URL:-https://vertex-capital-portfolio.vercel.app}
   app_id: Ov23lifj7lCto8d0EHYT
   app_secret: ${DECAP_CMS_GITHUB_APP_SECRET}
 

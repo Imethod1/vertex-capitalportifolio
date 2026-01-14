@@ -1,0 +1,7 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "env": {
+    "DECAP_CMS_GITHUB_APP_SECRET": "@decap_cms_github_app_secret"
+  }
+}
