@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/adminPortfolioManager.css';
+import portfolioData from '../data/portfolio.json';
 import type {
   PortfolioAllocation,
   Security,
@@ -57,9 +58,8 @@ export const AdminPortfolioManager: React.FC<AdminProps> = ({ onSavePortfolio })
   useEffect(() => {
     const loadPortfolio = async () => {
       try {
-        const response = await fetch('/data/portfolio.json');
-        const data = await response.json();
-        setPortfolio(data);
+        // Use imported data directly
+        setPortfolio(portfolioData as PortfolioState);
         setLoading(false);
       } catch (error) {
         console.error('Error loading portfolio:', error);
