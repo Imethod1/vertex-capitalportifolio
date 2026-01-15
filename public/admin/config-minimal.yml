@@ -9,8 +9,9 @@ media_folder: public/images
 public_folder: /images
 
 collections:
+  # Portfolio Settings - Basic Information
   - name: settings
-    label: Portfolio Settings
+    label: 📋 Portfolio Settings
     files:
       - file: src/data/settings.json
         label: Settings
@@ -36,3 +37,240 @@ collections:
           - label: YTD Performance %
             name: ytdPerformance
             widget: number
+
+  # Asset Allocations - Distribution of portfolio
+  - name: allocations
+    label: 📊 Asset Allocations
+    files:
+      - file: src/data/portfolio.json
+        label: Allocations
+        name: allocations
+        format: json
+        fields:
+          - label: Date
+            name: date
+            widget: datetime
+            format: YYYY-MM-DD
+          - label: Allocations
+            name: allocations
+            widget: list
+            fields:
+              - label: Asset Class
+                name: assetClass
+                widget: string
+              - label: Target %
+                name: targetPercent
+                widget: number
+              - label: Current %
+                name: currentPercent
+                widget: number
+              - label: Deviation %
+                name: deviationPercent
+                widget: number
+              - label: Rebalancing Required
+                name: rebalancingRequired
+                widget: boolean
+              - label: Notes
+                name: notes
+                widget: string
+
+  # Securities - Individual holdings
+  - name: securities
+    label: 📈 Securities & Holdings
+    files:
+      - file: src/data/portfolio.json
+        label: Securities
+        name: securities
+        format: json
+        fields:
+          - label: Date
+            name: date
+            widget: datetime
+            format: YYYY-MM-DD
+          - label: Securities
+            name: securities
+            widget: list
+            fields:
+              - label: Ticker
+                name: ticker
+                widget: string
+              - label: Company Name
+                name: companyName
+                widget: string
+              - label: Sector
+                name: sector
+                widget: string
+              - label: Value
+                name: value
+                widget: number
+              - label: % of Portfolio
+                name: percentOfPortfolio
+                widget: number
+              - label: Notes
+                name: notes
+                widget: string
+
+  # Risk Metrics - Risk monitoring
+  - name: risk_metrics
+    label: ⚠️ Risk Metrics
+    files:
+      - file: src/data/riskMetrics.json
+        label: Risk Metrics
+        name: risk_metrics
+        format: json
+        fields:
+          - label: Metrics
+            name: metrics
+            widget: list
+            fields:
+              - label: Metric Name
+                name: metricName
+                widget: string
+              - label: IPS Limit
+                name: ipsLimit
+                widget: string
+              - label: Current Value
+                name: currentValue
+                widget: string
+              - label: Status
+                name: metricStatus
+                widget: select
+                options:
+                  - Compliant
+                  - Warning
+                  - Breach
+              - label: Action Required
+                name: actionRequired
+                widget: string
+
+  # Liquidity & Cash Management
+  - name: liquidity
+    label: 💧 Liquidity & Cash
+    files:
+      - file: src/data/portfolio.json
+        label: Liquidity Items
+        name: liquidity
+        format: json
+        fields:
+          - label: Date
+            name: date
+            widget: datetime
+            format: YYYY-MM-DD
+          - label: Liquidity Items
+            name: liquidityItems
+            widget: list
+            fields:
+              - label: Item
+                name: item
+                widget: string
+              - label: Minimum/Maximum
+                name: minimumMaximum
+                widget: string
+              - label: Current %
+                name: currentPercent
+                widget: number
+              - label: Status
+                name: liquidityStatus
+                widget: select
+                options:
+                  - Pending
+                  - N/A
+                  - Compliant
+                  - Warning
+                  - Breach
+              - label: Action Needed
+                name: actionNeeded
+                widget: string
+
+  # Tactical Log - Recent adjustments
+  - name: tactical
+    label: 🎯 Tactical Adjustments
+    files:
+      - file: src/data/portfolio.json
+        label: Tactical Adjustments
+        name: tactical
+        format: json
+        fields:
+          - label: Tactical Adjustments
+            name: tacticalAdjustments
+            widget: list
+            fields:
+              - label: Description
+                name: description
+                widget: string
+              - label: Date
+                name: adjustmentDate
+                widget: datetime
+                format: YYYY-MM-DD
+              - label: Impact
+                name: impact
+                widget: string
+
+  # Performance Tracking
+  - name: performance
+    label: 📈 Performance Metrics
+    files:
+      - file: src/data/portfolio.json
+        label: Performance Metrics
+        name: performance
+        format: json
+        fields:
+          - label: Date
+            name: date
+            widget: datetime
+            format: YYYY-MM-DD
+          - label: Performance Metrics
+            name: performanceMetrics
+            widget: list
+            fields:
+              - label: Metric Name
+                name: metricName
+                widget: string
+              - label: Target Benchmark
+                name: targetBenchmark
+                widget: string
+              - label: Current Value
+                name: currentValue
+                widget: string
+              - label: Deviation
+                name: deviation
+                widget: string
+              - label: Notes
+                name: notes
+                widget: string
+
+  # Compliance Checking
+  - name: compliance
+    label: ✅ Compliance Checks
+    files:
+      - file: src/data/portfolio.json
+        label: Compliance Checks
+        name: compliance
+        format: json
+        fields:
+          - label: Compliance Checks
+            name: complianceChecks
+            widget: list
+            fields:
+              - label: Compliance Area
+                name: complianceArea
+                widget: string
+              - label: IPS Limit Rule
+                name: ipsLimitRule
+                widget: string
+              - label: Current Status
+                name: complianceStatus
+                widget: select
+                options:
+                  - Compliant
+                  - Warning
+                  - Breach
+              - label: Breach
+                name: breach
+                widget: select
+                options:
+                  - "Yes"
+                  - "No"
+              - label: Action Required
+                name: actionRequired
+                widget: string
