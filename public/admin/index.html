@@ -14,18 +14,318 @@
       html, body {
         height: 100%;
         width: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      }
+      #debug-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-height: 50%;
+        background: #1e1e1e;
+        color: #d4d4d4;
+        border-bottom: 2px solid #007acc;
+        overflow-y: auto;
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        z-index: 10000;
+      }
+      #debug-panel.hidden {
+        display: none;
+      }
+      #debug-toggle {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        background: #007acc;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        z-index: 10001;
+        font-weight: bold;
+      }
+      .debug-entry {
+        padding: 8px 12px;
+        border-bottom: 1px solid #333;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+      .debug-error {
+        background: #5f1818;
+        color: #ff6b6b;
+      }
+      .debug-success {
+        background: #185f18;
+        color: #6bff6b;
+      }
+      .debug-warning {
+        background: #5f4a18;
+        color: #ffcc6b;
+      }
+      .debug-info {
+        background: #184a5f;
+        color: #6bccff;
       }
       #nc-root {
         min-height: 100vh;
         width: 100%;
+        margin-top: 50%;
+      }
+      #nc-root.with-debug {
+        margin-top: 50%;
       }
     </style>
   </head>
   <body>
+    <!-- Debug Panel -->
+    <div id="debug-panel">
+      <div style="padding: 10px; background: #0e639c; border-bottom: 1px solid #007acc; font-weight: bold;">
+        🔍 Decap CMS Debug Panel
+        <button id="debug-toggle" style="margin-left: 10px; float: right; background: #ff4444;">Close</button>
+      </div>
+      <div id="debug-entries"></div>
+    </div>
+
     <!-- Decap CMS root container -->
     <div id="nc-root"></div>
 
     <!-- Load Decap CMS from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.js"></script>
+
+    <script>
+      // ====================
+      // DEBUG LOGGING SYSTEM
+      // ====================
+      const debugPanel = document.getElementById('debug-panel');
+      const debugEntries = document.getElementById('debug-entries');
+      const debugToggle = document.getElementById('debug-toggle');
+      const ncRoot = document.getElementById('nc-root');
+
+      let debugVisible = true;
+
+      function addDebug(message, type = 'info') {
+        const timestamp = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const entry = document.createElement('div');
+        entry.className = `debug-entry debug-${type}`;
+        entry.textContent = `[${timestamp}] ${type.toUpperCase()}: ${message}`;
+        debugEntries.appendChild(entry);
+        debugEntries.scrollTop = debugEntries.scrollHeight;
+        console.log(`[${type.toUpperCase()}]`, message);
+      }
+
+      debugToggle.addEventListener('click', () => {
+        debugVisible = !debugVisible;
+        if (debugVisible) {
+          debugPanel.classList.remove('hidden');
+          ncRoot.classList.add('with-debug');
+          debugToggle.textContent = 'Close';
+        } else {
+          debugPanel.classList.add('hidden');
+          ncRoot.classList.remove('with-debug');
+          debugToggle.textContent = 'Show Debug';
+        }
+      });
+
+      // Global error handler
+      window.addEventListener('error', (e) => {
+        addDebug(`${e.message} @ ${e.filename}:${e.lineno}:${e.colno}`, 'error');
+      });
+
+      window.addEventListener('unhandledrejection', (e) => {
+        addDebug(`Unhandled Promise Rejection: ${e.reason}`, 'error');
+      });
+
+      // ====================
+      // INITIALIZATION
+      // ====================
+      addDebug('Page loaded, initializing Decap CMS...', 'info');
+      addDebug(`Current URL: ${window.location.href}`, 'info');
+      addDebug(`Current path: ${window.location.pathname}`, 'info');
+
+      // Monitor Decap CMS script loading
+      const scriptLoadStart = Date.now();
+      let cmsLoaded = false;
+
+      const scriptCheckInterval = setInterval(() => {
+        if (window.CMS) {
+          cmsLoaded = true;
+          const loadTime = Date.now() - scriptLoadStart;
+          addDebug(`✓ Decap CMS script loaded (${loadTime}ms)`, 'success');
+          clearInterval(scriptCheckInterval);
+        }
+      }, 100);
+
+      setTimeout(() => {
+        if (!cmsLoaded) {
+          addDebug(`✗ CMS script did not load within 10 seconds`, 'error');
+          clearInterval(scriptCheckInterval);
+        }
+      }, 10000);
+
+      // ====================
+      // INTERCEPT FETCH
+      // ====================
+      const originalFetch = window.fetch;
+      window.fetch = function(...args) {
+        const url = args[0];
+        const options = args[1] || {};
+        const method = options.method || 'GET';
+
+        // Log all config-related requests
+        if (typeof url === 'string' && url.includes('config')) {
+          addDebug(`→ FETCH: ${method} ${url}`, 'warning');
+        }
+
+        return originalFetch.apply(this, args)
+          .then(response => {
+            if (typeof url === 'string' && url.includes('config')) {
+              addDebug(`← RESPONSE: ${method} ${url} → HTTP ${response.status}`, 'info');
+              
+              // Clone response to read content
+              if (response.status === 200) {
+                const cloned = response.clone();
+                return cloned.text().then(text => {
+                  addDebug(`Config file size: ${text.length} bytes`, 'info');
+                  addDebug(`First 200 chars: ${text.substring(0, 200)}...`, 'info');
+                  return response;
+                });
+              }
+            }
+            return response;
+          })
+          .catch(err => {
+            if (typeof url === 'string' && url.includes('config')) {
+              addDebug(`✗ FETCH ERROR: ${method} ${url} → ${err.message}`, 'error');
+            }
+            throw err;
+          });
+      };
+
+      // ====================
+      // YAML VALIDATION
+      // ====================
+      async function validateConfigYaml() {
+        try {
+          addDebug('Fetching config.yml for validation...', 'info');
+          
+          const response = await fetch('/admin/config.yml');
+          
+          if (response.status !== 200) {
+            addDebug(`✗ Config fetch failed: HTTP ${response.status}`, 'error');
+            return false;
+          }
+
+          const yamlText = await response.text();
+          addDebug(`✓ Config.yml received (${yamlText.length} bytes)`, 'success');
+
+          // Basic YAML validation
+          const lines = yamlText.split('\n');
+          addDebug(`Config.yml has ${lines.length} lines`, 'info');
+
+          // Check for syntax issues
+          let indentLevel = 0;
+          for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            if (!line.trim() || line.trim().startsWith('#')) continue;
+
+            // Count leading spaces
+            const spaces = line.match(/^ */)[0].length;
+            if (spaces % 2 !== 0) {
+              addDebug(`⚠ Line ${i + 1}: Odd indentation (${spaces} spaces) - may cause parsing issues`, 'warning');
+            }
+
+            // Check for common YAML errors
+            if (line.includes(': ') && !line.trim().startsWith('-')) {
+              const parts = line.split(':');
+              if (parts.length >= 2 && parts[1].trim() === '') {
+                addDebug(`⚠ Line ${i + 1}: Empty value after colon - "${line.trim()}"`, 'warning');
+              }
+            }
+          }
+
+          addDebug(`✓ YAML structure validation passed`, 'success');
+          return true;
+
+        } catch (error) {
+          addDebug(`✗ YAML validation error: ${error.message}`, 'error');
+          return false;
+        }
+      }
+
+      // ====================
+      // CMS INITIALIZATION MONITORING
+      // ====================
+      let initAttempted = false;
+
+      async function monitorCMS() {
+        if (!window.CMS) {
+          setTimeout(monitorCMS, 500);
+          return;
+        }
+
+        addDebug('✓ CMS object detected on window', 'success');
+
+        // Validate config before CMS tries to use it
+        const isValidYaml = await validateConfigYaml();
+
+        if (!isValidYaml) {
+          addDebug('✗ Config validation failed - CMS initialization may fail', 'error');
+        }
+
+        // Attempt to catch CMS errors
+        if (!initAttempted) {
+          initAttempted = true;
+          addDebug('CMS auto-initializing...', 'info');
+
+          // Monitor for CMS errors after initialization
+          setTimeout(() => {
+            // Check if CMS rendered successfully
+            const adminContainer = document.querySelector('[class*="cms"]');
+            if (adminContainer) {
+              addDebug('✓ CMS UI rendered successfully', 'success');
+            } else {
+              addDebug('⚠ CMS UI not found - check browser console for errors', 'warning');
+            }
+          }, 2000);
+        }
+      }
+
+      // Start monitoring when page is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', monitorCMS);
+      } else {
+        monitorCMS();
+      }
+
+      // ====================
+      // DETAILED ERROR REPORTING
+      // ====================
+      window.addEventListener('load', () => {
+        addDebug('Window load event fired', 'info');
+        
+        setTimeout(() => {
+          addDebug('--- Checking for CMS initialization errors ---', 'warning');
+          
+          // Check for error messages in DOM
+          const errorElements = document.querySelectorAll('[class*="error"], [class*="Error"]');
+          if (errorElements.length > 0) {
+            errorElements.forEach((el, idx) => {
+              addDebug(`Error element ${idx}: ${el.textContent.substring(0, 100)}`, 'error');
+            });
+          } else {
+            addDebug('No error elements found in DOM', 'info');
+          }
+
+          // Log final status
+          if (window.CMS) {
+            addDebug('✓ Final Status: CMS is available', 'success');
+          } else {
+            addDebug('✗ Final Status: CMS not available', 'error');
+          }
+        }, 3000);
+      });
+    </script>
   </body>
 </html>
