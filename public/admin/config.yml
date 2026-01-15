@@ -9,6 +9,8 @@ backend:
 media_folder: public/images
 public_folder: /images
 
+publish_mode: editorial_workflow
+
 collections:
   - name: portfolio
     label: Portfolio Data

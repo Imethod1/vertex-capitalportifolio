@@ -84,6 +84,7 @@
       <div style="padding: 10px; background: #0e639c; border-bottom: 1px solid #007acc; font-weight: bold;">
         🔍 Decap CMS Debug Panel
         <button id="debug-toggle" style="margin-left: 10px; float: right; background: #ff4444;">Close</button>
+        <button id="test-minimal" style="margin-left: 5px; float: right; background: #44ff44; color: black;">Test Minimal Config</button>
       </div>
       <div id="debug-entries"></div>
     </div>
@@ -126,6 +127,15 @@
           ncRoot.classList.remove('with-debug');
           debugToggle.textContent = 'Show Debug';
         }
+      });
+
+      // Test minimal config button
+      const testMinimalBtn = document.getElementById('test-minimal');
+      testMinimalBtn.addEventListener('click', () => {
+        addDebug('⚠ TESTING MINIMAL CONFIG - Reload page with ?config=minimal to switch', 'warning');
+        const url = new URL(window.location);
+        url.searchParams.set('config', 'minimal');
+        window.location.href = url.toString();
       });
 
       // Global error handler
@@ -173,18 +183,18 @@
         const options = args[1] || {};
         const method = options.method || 'GET';
 
-        // Log all config-related requests
-        if (typeof url === 'string' && url.includes('config')) {
+        // Log all requests (not just config)
+        if (typeof url === 'string') {
           addDebug(`→ FETCH: ${method} ${url}`, 'warning');
         }
 
         return originalFetch.apply(this, args)
           .then(response => {
-            if (typeof url === 'string' && url.includes('config')) {
+            if (typeof url === 'string') {
               addDebug(`← RESPONSE: ${method} ${url} → HTTP ${response.status}`, 'info');
               
-              // Clone response to read content
-              if (response.status === 200) {
+              // Clone response to read content for config files
+              if (response.status === 200 && url.includes('config')) {
                 const cloned = response.clone();
                 return cloned.text().then(text => {
                   addDebug(`Config file size: ${text.length} bytes`, 'info');
@@ -196,11 +206,29 @@
             return response;
           })
           .catch(err => {
-            if (typeof url === 'string' && url.includes('config')) {
-              addDebug(`✗ FETCH ERROR: ${method} ${url} → ${err.message}`, 'error');
-            }
+            addDebug(`✗ FETCH ERROR: ${method} ${url} → ${err.message}`, 'error');
             throw err;
           });
+      };
+
+      // ====================
+      // CAPTURE CONSOLE ERRORS
+      // ====================
+      const originalConsoleError = console.error;
+      const originalConsoleWarn = console.warn;
+
+      console.error = function(...args) {
+        const message = args.map(a => typeof a === 'string' ? a : JSON.stringify(a)).join(' ');
+        addDebug(`CONSOLE ERROR: ${message}`, 'error');
+        originalConsoleError.apply(console, args);
+      };
+
+      console.warn = function(...args) {
+        const message = args.map(a => typeof a === 'string' ? a : JSON.stringify(a)).join(' ');
+        if (message.includes('config') || message.includes('Config') || message.includes('error')) {
+          addDebug(`CONSOLE WARN: ${message}`, 'warning');
+        }
+        originalConsoleWarn.apply(console, args);
       };
 
       // ====================
