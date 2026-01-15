@@ -282,6 +282,7 @@
   padding: 16px;
   background: #f8f9fa;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
   display: flex;
   justify-content: space-between;
@@ -426,4 +427,9 @@
   .editor-table {
     page-break-inside: avoid;
   }
+}
+
+/* Hidden file input */
+#import-file {
+  display: none;
 }
