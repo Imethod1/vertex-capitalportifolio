@@ -99,6 +99,9 @@
       window.CMS_CONFIG_URL = '/admin/config-minimal.yml';
     </script>
 
+    <!-- Load JS-YAML for parsing config -->
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+
     <!-- Load Decap CMS from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.js"></script>
 
@@ -318,10 +321,21 @@
           addDebug('Manually initializing CMS...', 'info');
           
           try {
-            window.CMS.init({ config: { load_config_file: configUrl } });
-            addDebug('✓ CMS.init() called successfully', 'success');
+            // Fetch and parse YAML config ourselves
+            addDebug(`Fetching and parsing config from: ${configUrl}`, 'info');
+            const response = await fetch(configUrl);
+            const yamlText = await response.text();
+            
+            // Parse YAML to JS object
+            const config = jsyaml.load(yamlText);
+            addDebug('✓ YAML parsed to config object', 'success');
+            
+            // Initialize CMS with parsed config object
+            window.CMS.init({ config });
+            addDebug('✓ CMS.init() called with config object', 'success');
           } catch (error) {
             addDebug(`✗ CMS.init() error: ${error.message}`, 'error');
+            console.error('Full error:', error);
           }
 
           // Monitor for CMS errors after initialization
