@@ -70,10 +70,6 @@ const Page7Compliance: React.FC = () => {
             <h3 className="text-sm font-semibold text-gray-600 mb-2">Breaches</h3>
             <p className="text-3xl font-bold text-red-600">{breachCount}</p>
           </div>
-          <div className="rounded-lg p-6 border-2 bg-blue-50 border-blue-200">
-            <h3 className="text-sm font-semibold text-blue-700 mb-2">ℹ️ Read-Only</h3>
-            <p className="text-xs text-gray-600">Edit via Decap CMS</p>
-          </div>
         </div>
 
         {/* Breach Alerts */}

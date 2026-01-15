@@ -43,10 +43,6 @@ const Page5TacticalLog: React.FC = () => {
               {tactics.length > 0 ? Math.max(...tactics.map((t) => Math.abs(t.deviationPercent))).toFixed(2) : 0}%
             </p>
           </div>
-          <div className="rounded-lg p-6 border-2 bg-blue-50 border-blue-200">
-            <h3 className="text-sm font-semibold text-blue-700 mb-2">ℹ️ Read-Only</h3>
-            <p className="text-xs text-gray-600">Edit via Decap CMS</p>
-          </div>
         </div>
 
         {/* Deviation Warnings */}

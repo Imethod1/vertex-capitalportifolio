@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
-import AdminPortfolioManager from './components/AdminPortfolioManager';
 import Page1AllocationSnapshot from './pages/Page1AllocationSnapshot';
 import Page2SecurityExposure from './pages/Page2SecurityExposure';
 import Page3RiskMetrics from './pages/Page3RiskMetrics';
