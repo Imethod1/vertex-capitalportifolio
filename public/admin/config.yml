@@ -30,19 +30,59 @@ collections:
             widget: list
             fields:
               - label: Asset Class
-                name: allocationClass
-                widget: select
-                options:
-                  - Fixed Income
-                  - Domestic Equities
-                  - Regional Equities
-                  - Cash
+                name: assetClass
+                widget: string
               - label: Target %
                 name: targetPercent
                 widget: number
               - label: Current %
                 name: currentPercent
                 widget: number
+              - label: Deviation %
+                name: deviationPercent
+                widget: number
+              - label: Rebalancing Required
+                name: rebalancingRequired
+                widget: boolean
+              - label: Notes
+                name: notes
+                widget: string
+          - label: Securities
+            name: securities
+            widget: list
+            fields:
+              - label: Security Name
+                name: name
+                widget: string
+              - label: Type
+                name: type
+                widget: string
+              - label: Allocation %
+                name: allocationPercent
+                widget: number
+          - label: Risk Metrics
+            name: riskMetrics
+            widget: list
+            fields:
+              - label: Metric Name
+                name: metricName
+                widget: string
+              - label: IPS Limit
+                name: ipsLimit
+                widget: string
+              - label: Current Value
+                name: currentValue
+                widget: string
+              - label: Status
+                name: status
+                widget: select
+                options:
+                  - Compliant
+                  - Warning
+                  - Breach
+              - label: Action Required
+                name: actionRequired
+                widget: string
 
   - name: risk_metrics
     label: Risk Metrics
@@ -59,6 +99,9 @@ collections:
               - label: Metric Name
                 name: metricName
                 widget: string
+              - label: IPS Limit
+                name: ipsLimit
+                widget: string
               - label: Current Value
                 name: currentValue
                 widget: string
@@ -69,6 +112,9 @@ collections:
                   - Compliant
                   - Warning
                   - Breach
+              - label: Action Required
+                name: actionRequired
+                widget: string
 
   - name: settings
     label: Portfolio Settings
@@ -88,6 +134,9 @@ collections:
             name: lastUpdated
             widget: datetime
             format: YYYY-MM-DD HH:mm
+          - label: Total Value
+            name: totalValue
+            widget: number
           - label: Benchmark Index
             name: benchmark
             widget: string
