@@ -67,10 +67,10 @@ export const AdminPortfolioManager: React.FC<AdminProps> = ({ onSavePortfolio })
         // Merge all data sources into a combined portfolio state
         const mergedPortfolio: PortfolioState = {
           date: portfolioData.date,
-          allocations: allocationsData.allocations,
+          allocations: allocationsData.allocations as PortfolioAllocation[],
           securities: securitiesData.securities,
-          riskMetrics: portfolioData.riskMetrics,
-          liquidityItems: liquidityData.liquidityItems,
+          riskMetrics: portfolioData.riskMetrics as RiskMetric[],
+          liquidityItems: liquidityData.liquidityItems as LiquidityItem[],
           tacticalAdjustments: tacticalData.tacticalAdjustments,
           performanceMetrics: performanceData.performanceMetrics,
           complianceChecks: complianceData.complianceChecks,
@@ -656,7 +656,7 @@ const RiskMetricsEditor: React.FC<RiskMetricsEditorProps> = ({ metrics, onChange
         metric: 'New Metric',
         ipsLimit: '',
         currentValue: '',
-        status: 'Compliant',
+        status: 'Compliant' as const,
         actionRequired: '',
       },
     ]);
@@ -717,7 +717,7 @@ const RiskMetricsEditor: React.FC<RiskMetricsEditorProps> = ({ metrics, onChange
                   aria-label="Compliance status"
                   value={metric.status}
                   onChange={(e) =>
-                    handleUpdate(idx, 'status', e.target.value as any)
+                    handleUpdate(idx, 'status', e.target.value as 'Compliant' | 'Warning' | 'Breach')
                   }
                 >
                   <option value="Compliant">Compliant</option>
@@ -771,7 +771,7 @@ const LiquidityEditor: React.FC<LiquidityEditorProps> = ({ items, onChange }) =>
         minimum: 0,
         maximum: 0,
         current: 0,
-        status: 'Adequate',
+        status: 'Adequate' as const,
         actionNeeded: '',
       },
     ]);
@@ -842,7 +842,7 @@ const LiquidityEditor: React.FC<LiquidityEditorProps> = ({ items, onChange }) =>
                 <select
                   aria-label="Liquidity status"
                   value={item.status}
-                  onChange={(e) => handleUpdate(idx, 'status', e.target.value as any)}
+                  onChange={(e) => handleUpdate(idx, 'status', e.target.value as 'Adequate' | 'Warning' | 'Critical')}
                 >
                   <option value="Adequate">Adequate</option>
                   <option value="Warning">Warning</option>
