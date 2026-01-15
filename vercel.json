@@ -1,17 +1,7 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "headers": [
-    {
-      "source": "/admin/config.yml",
-      "headers": [
-        { "key": "Content-Type", "value": "text/yaml; charset=utf-8" },
-        { "key": "Cache-Control", "value": "no-cache" }
-      ]
-    }
-  ],
   "rewrites": [
-    { "source": "/admin", "destination": "/admin/index.html" },
     {
       "source": "/(.*)",
       "has": [
