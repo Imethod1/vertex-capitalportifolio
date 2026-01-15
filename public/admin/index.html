@@ -92,6 +92,13 @@
     <!-- Decap CMS root container -->
     <div id="nc-root"></div>
 
+    <!-- Decap CMS Configuration Override -->
+    <script>
+      // Force Decap to use config-minimal.yml for testing
+      window.CMS_MANUAL_INIT = true;
+      window.CMS_CONFIG_URL = '/admin/config-minimal.yml';
+    </script>
+
     <!-- Load Decap CMS from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.js"></script>
 
@@ -234,11 +241,11 @@
       // ====================
       // YAML VALIDATION
       // ====================
-      async function validateConfigYaml() {
+      async function validateConfigYaml(configUrl = '/admin/config.yml') {
         try {
           addDebug('Fetching config.yml for validation...', 'info');
           
-          const response = await fetch('/admin/config.yml');
+          const response = await fetch(configUrl);
           
           if (response.status !== 200) {
             addDebug(`✗ Config fetch failed: HTTP ${response.status}`, 'error');
@@ -296,16 +303,26 @@
         addDebug('✓ CMS object detected on window', 'success');
 
         // Validate config before CMS tries to use it
-        const isValidYaml = await validateConfigYaml();
+        const configUrl = window.CMS_CONFIG_URL || '/admin/config.yml';
+        addDebug(`Using config file: ${configUrl}`, 'info');
+        
+        const isValidYaml = await validateConfigYaml(configUrl);
 
         if (!isValidYaml) {
           addDebug('✗ Config validation failed - CMS initialization may fail', 'error');
         }
 
-        // Attempt to catch CMS errors
+        // Initialize CMS manually with custom config
         if (!initAttempted) {
           initAttempted = true;
-          addDebug('CMS auto-initializing...', 'info');
+          addDebug('Manually initializing CMS...', 'info');
+          
+          try {
+            window.CMS.init({ config: { load_config_file: configUrl } });
+            addDebug('✓ CMS.init() called successfully', 'success');
+          } catch (error) {
+            addDebug(`✗ CMS.init() error: ${error.message}`, 'error');
+          }
 
           // Monitor for CMS errors after initialization
           setTimeout(() => {
