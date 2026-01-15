@@ -22,9 +22,6 @@ collections:
             name: date
             widget: datetime
             format: YYYY-MM-DD
-          - label: Total Value TZS
-            name: totalValue
-            widget: number
           - label: Allocations
             name: allocations
             widget: list
@@ -47,19 +44,6 @@ collections:
               - label: Notes
                 name: notes
                 widget: string
-          - label: Securities
-            name: securities
-            widget: list
-            fields:
-              - label: Security Name
-                name: name
-                widget: string
-              - label: Type
-                name: type
-                widget: string
-              - label: Allocation %
-                name: allocationPercent
-                widget: number
           - label: Risk Metrics
             name: riskMetrics
             widget: list
@@ -80,6 +64,90 @@ collections:
                   - Compliant
                   - Warning
                   - Breach
+              - label: Action Required
+                name: actionRequired
+                widget: string
+          - label: Liquidity Items
+            name: liquidityItems
+            widget: list
+            fields:
+              - label: Item
+                name: item
+                widget: string
+              - label: Minimum/Maximum
+                name: minimumMaximum
+                widget: string
+              - label: Current %
+                name: currentPercent
+                widget: number
+              - label: Status
+                name: status
+                widget: select
+                options:
+                  - Pending
+                  - N/A
+                  - Compliant
+                  - Warning
+                  - Breach
+              - label: Action Needed
+                name: actionNeeded
+                widget: string
+          - label: Tactical Adjustments
+            name: tacticalAdjustments
+            widget: list
+            fields:
+              - label: Description
+                name: description
+                widget: string
+              - label: Date
+                name: date
+                widget: datetime
+                format: YYYY-MM-DD
+              - label: Impact
+                name: impact
+                widget: string
+          - label: Performance Metrics
+            name: performanceMetrics
+            widget: list
+            fields:
+              - label: Metric Name
+                name: metricName
+                widget: string
+              - label: Target Benchmark
+                name: targetBenchmark
+                widget: string
+              - label: Current Value
+                name: currentValue
+                widget: string
+              - label: Deviation
+                name: deviation
+                widget: string
+              - label: Notes
+                name: notes
+                widget: string
+          - label: Compliance Checks
+            name: complianceChecks
+            widget: list
+            fields:
+              - label: Compliance Area
+                name: complianceArea
+                widget: string
+              - label: IPS Limit Rule
+                name: ipsLimitRule
+                widget: string
+              - label: Current Status
+                name: currentStatus
+                widget: select
+                options:
+                  - Compliant
+                  - Warning
+                  - Breach
+              - label: Breach
+                name: breach
+                widget: select
+                options:
+                  - "Yes"
+                  - "No"
               - label: Action Required
                 name: actionRequired
                 widget: string
