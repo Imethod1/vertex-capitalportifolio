@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
+import AdminPortfolioManager from './components/AdminPortfolioManager';
 import Page1AllocationSnapshot from './pages/Page1AllocationSnapshot';
 import Page2SecurityExposure from './pages/Page2SecurityExposure';
 import Page3RiskMetrics from './pages/Page3RiskMetrics';
@@ -27,6 +28,7 @@ const App: React.FC = () => {
               <Route path="/tactical-log" element={<Page5TacticalLog />} />
               <Route path="/performance" element={<Page6Performance />} />
               <Route path="/compliance" element={<Page7Compliance />} />
+              <Route path="/admin" element={<AdminPortfolioManager />} />
             </Routes>
           </main>
         </div>
