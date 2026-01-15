@@ -42,7 +42,7 @@ collections:
   - name: allocations
     label: 📊 Asset Allocations
     files:
-      - file: src/data/portfolio.json
+      - file: src/data/allocations.json
         label: Allocations
         name: allocations
         format: json
@@ -59,13 +59,13 @@ collections:
                 name: assetClass
                 widget: string
               - label: Target %
-                name: targetPercent
+                name: target
                 widget: number
               - label: Current %
-                name: currentPercent
+                name: current
                 widget: number
               - label: Deviation %
-                name: deviationPercent
+                name: deviation
                 widget: number
               - label: Rebalancing Required
                 name: rebalancingRequired
@@ -78,7 +78,7 @@ collections:
   - name: securities
     label: 📈 Securities & Holdings
     files:
-      - file: src/data/portfolio.json
+      - file: src/data/securities.json
         label: Securities
         name: securities
         format: json
@@ -147,7 +147,7 @@ collections:
   - name: liquidity
     label: 💧 Liquidity & Cash
     files:
-      - file: src/data/portfolio.json
+      - file: src/data/liquidity.json
         label: Liquidity Items
         name: liquidity
         format: json
@@ -163,21 +163,22 @@ collections:
               - label: Item
                 name: item
                 widget: string
-              - label: Minimum/Maximum
-                name: minimumMaximum
-                widget: string
+              - label: Minimum
+                name: minimum
+                widget: number
+              - label: Maximum
+                name: maximum
+                widget: number
               - label: Current %
-                name: currentPercent
+                name: current
                 widget: number
               - label: Status
-                name: liquidityStatus
+                name: status
                 widget: select
                 options:
-                  - Pending
-                  - N/A
-                  - Compliant
+                  - Adequate
                   - Warning
-                  - Breach
+                  - Critical
               - label: Action Needed
                 name: actionNeeded
                 widget: string
@@ -186,11 +187,15 @@ collections:
   - name: tactical
     label: 🎯 Tactical Adjustments
     files:
-      - file: src/data/portfolio.json
+      - file: src/data/tactical.json
         label: Tactical Adjustments
         name: tactical
         format: json
         fields:
+          - label: Date
+            name: date
+            widget: datetime
+            format: YYYY-MM-DD
           - label: Tactical Adjustments
             name: tacticalAdjustments
             widget: list
@@ -210,7 +215,7 @@ collections:
   - name: performance
     label: 📈 Performance Metrics
     files:
-      - file: src/data/portfolio.json
+      - file: src/data/performance.json
         label: Performance Metrics
         name: performance
         format: json
@@ -224,13 +229,13 @@ collections:
             widget: list
             fields:
               - label: Metric Name
-                name: metricName
+                name: metric
                 widget: string
               - label: Target Benchmark
-                name: targetBenchmark
+                name: target
                 widget: string
               - label: Current Value
-                name: currentValue
+                name: current
                 widget: string
               - label: Deviation
                 name: deviation
@@ -243,23 +248,27 @@ collections:
   - name: compliance
     label: ✅ Compliance Checks
     files:
-      - file: src/data/portfolio.json
+      - file: src/data/compliance.json
         label: Compliance Checks
         name: compliance
         format: json
         fields:
+          - label: Date
+            name: date
+            widget: datetime
+            format: YYYY-MM-DD
           - label: Compliance Checks
             name: complianceChecks
             widget: list
             fields:
               - label: Compliance Area
-                name: complianceArea
+                name: area
                 widget: string
               - label: IPS Limit Rule
-                name: ipsLimitRule
+                name: ipsLimit
                 widget: string
               - label: Current Status
-                name: complianceStatus
+                name: currentStatus
                 widget: select
                 options:
                   - Compliant
@@ -267,10 +276,7 @@ collections:
                   - Breach
               - label: Breach
                 name: breach
-                widget: select
-                options:
-                  - "Yes"
-                  - "No"
+                widget: boolean
               - label: Action Required
                 name: actionRequired
                 widget: string
