@@ -15,7 +15,7 @@ collections:
     files:
       - file: src/data/settings.json
         label: Settings
-        name: settings
+        name: settings_file
         format: json
         fields:
           - label: Portfolio Name
@@ -44,7 +44,7 @@ collections:
     files:
       - file: src/data/allocations.json
         label: Allocations
-        name: allocations
+        name: allocations_file
         format: json
         fields:
           - label: Date
@@ -80,7 +80,7 @@ collections:
     files:
       - file: src/data/securities.json
         label: Securities
-        name: securities
+        name: securities_file
         format: json
         fields:
           - label: Date
@@ -116,7 +116,7 @@ collections:
     files:
       - file: src/data/riskMetrics.json
         label: Risk Metrics
-        name: risk_metrics
+        name: risk_metrics_file
         format: json
         fields:
           - label: Metrics
@@ -149,7 +149,7 @@ collections:
     files:
       - file: src/data/liquidity.json
         label: Liquidity Items
-        name: liquidity
+        name: liquidity_file
         format: json
         fields:
           - label: Date
@@ -189,7 +189,7 @@ collections:
     files:
       - file: src/data/tactical.json
         label: Tactical Adjustments
-        name: tactical
+        name: tactical_file
         format: json
         fields:
           - label: Date
@@ -217,7 +217,7 @@ collections:
     files:
       - file: src/data/performance.json
         label: Performance Metrics
-        name: performance
+        name: performance_file
         format: json
         fields:
           - label: Date
@@ -250,7 +250,7 @@ collections:
     files:
       - file: src/data/compliance.json
         label: Compliance Checks
-        name: compliance
+        name: compliance_file
         format: json
         fields:
           - label: Date
