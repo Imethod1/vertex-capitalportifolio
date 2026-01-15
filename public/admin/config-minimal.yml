@@ -1,5 +1,7 @@
 backend:
-  name: test-repo
+  name: github
+  repo: Imethod1/vertex-capitalportifolio
+  branch: main
 
 media_folder: public/images
 public_folder: /images
