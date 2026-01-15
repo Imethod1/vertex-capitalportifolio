@@ -52,20 +52,20 @@ collections:
             widget: datetime
             format: YYYY-MM-DD
           - label: Allocations
-            name: allocations
+            name: allocationsList
             widget: list
             fields:
               - label: Asset Class
                 name: assetClass
                 widget: string
               - label: "Target %"
-                name: target
+                name: allocationTarget
                 widget: number
               - label: "Current %"
                 name: allocationsCurrent
                 widget: number
               - label: "Deviation %"
-                name: deviation
+                name: allocationDeviation
                 widget: number
               - label: Rebalancing Required
                 name: rebalancingRequired
@@ -88,7 +88,7 @@ collections:
             widget: datetime
             format: YYYY-MM-DD
           - label: Securities
-            name: securities
+            name: securitiesList
             widget: list
             fields:
               - label: Ticker
@@ -127,7 +127,7 @@ collections:
                 name: metricName
                 widget: string
               - label: IPS Limit
-                name: ipsLimit
+                name: riskIpsLimit
                 widget: string
               - label: Current Value
                 name: currentValue
@@ -140,7 +140,7 @@ collections:
                   - Warning
                   - Breach
               - label: Action Required
-                name: actionRequired
+                name: riskActionRequired
                 widget: string
 
   # Liquidity & Cash Management
@@ -232,13 +232,13 @@ collections:
                 name: metric
                 widget: string
               - label: Target Benchmark
-                name: target
+                name: performanceTarget
                 widget: string
               - label: Current Value
                 name: performanceCurrent
                 widget: string
               - label: Deviation
-                name: deviation
+                name: performanceDeviation
                 widget: string
               - label: Notes
                 name: performanceNotes
@@ -265,7 +265,7 @@ collections:
                 name: area
                 widget: string
               - label: IPS Limit Rule
-                name: ipsLimit
+                name: complianceIpsLimit
                 widget: string
               - label: Current Status
                 name: currentStatus
@@ -278,5 +278,5 @@ collections:
                 name: breach
                 widget: boolean
               - label: Action Required
-                name: actionRequired
+                name: complianceActionRequired
                 widget: string
