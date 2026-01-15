@@ -5,7 +5,6 @@ backend:
   base_url: https://vertex-capitalportifolio.vercel.app
   site_domain: vertex-capitalportifolio.vercel.app
   auth_endpoint: /api/auth
-  app_id: Ov23lifj7lCto8d0EHYT
 
 media_folder: public/images
 public_folder: /images
@@ -82,7 +81,7 @@ collections:
                 name: currentPercent
                 widget: number
               - label: Status
-                name: status
+                name: liquidityStatus
                 widget: select
                 options:
                   - Pending
@@ -101,7 +100,7 @@ collections:
                 name: description
                 widget: string
               - label: Date
-                name: date
+                name: adjustmentDate
                 widget: datetime
                 format: YYYY-MM-DD
               - label: Impact
@@ -137,7 +136,7 @@ collections:
                 name: ipsLimitRule
                 widget: string
               - label: Current Status
-                name: currentStatus
+                name: complianceStatus
                 widget: select
                 options:
                   - Compliant
@@ -175,7 +174,7 @@ collections:
                 name: currentValue
                 widget: string
               - label: Status
-                name: status
+                name: metricStatus
                 widget: select
                 options:
                   - Compliant

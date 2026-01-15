@@ -91,21 +91,21 @@
       "item": "Cash & Cash Equivalents",
       "minimumMaximum": "10-15%",
       "currentPercent": 0,
-      "status": "Pending",
+      "liquidityStatus": "Pending",
       "actionNeeded": "Monitor weekly"
     },
     {
       "item": "Time to Liquidate 80% Portfolio",
       "minimumMaximum": "≤30 days",
       "currentPercent": 0,
-      "status": "N/A",
+      "liquidityStatus": "N/A",
       "actionNeeded": "Monitor liquidity conditions"
     },
     {
       "item": "Bid-Ask Spread / Daily Volume",
       "minimumMaximum": "Adequate for execution",
       "currentPercent": 0,
-      "status": "Pending",
+      "liquidityStatus": "Pending",
       "actionNeeded": "Monitor execution efficiency"
     }
   ],
