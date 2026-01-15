@@ -4,12 +4,13 @@
  */
 
 export default async (req, res) => {
-  // Only accept POST requests
-  if (req.method !== 'POST') {
+  // Accept both GET and POST requests
+  if (req.method !== 'GET' && req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { code } = req.body;
+  // Get code from query params (GET) or body (POST)
+  const code = req.query.code || req.body?.code;
 
   if (!code) {
     return res.status(400).json({ error: 'No authorization code provided' });
@@ -29,7 +30,7 @@ export default async (req, res) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/vnd.github.v3+json',
+        'Accept': 'application/json', // Request JSON response
       },
       body: JSON.stringify({
         client_id: clientId,
