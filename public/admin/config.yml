@@ -2,17 +2,11 @@ backend:
   name: github
   repo: Imethod1/vertex-capitalportifolio
   branch: main
-  auth_endpoint: /api/auth
   base_url: https://vertex-capitalportifolio.vercel.app
-  app_id: Ov23lifj7lCto8d0EHYT
-  site_id: vertex-capitalportifolio.vercel.app
+  auth_endpoint: /api/auth
 
 media_folder: public/images
 public_folder: /images
-
-media_library:
-  name: uploadcare
-  config:
 
 collections:
   - name: portfolio

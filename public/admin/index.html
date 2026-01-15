@@ -7,182 +7,40 @@
     <title>Vertex Capital Admin</title>
     <style>
       body {
-        font-family: monospace;
-        padding: 20px;
-        background: #f5f5f5;
+        margin: 0;
+        padding: 0;
       }
-      #debug {
-        background: white;
-        border: 2px solid #ddd;
-        padding: 15px;
-        border-radius: 4px;
-        margin-bottom: 20px;
-        max-height: 400px;
-        overflow-y: auto;
-      }
-      .debug-line {
-        margin: 5px 0;
-        padding: 3px;
-        border-left: 3px solid #ccc;
-        padding-left: 10px;
-      }
-      .debug-line.error {
-        color: red;
-        border-left-color: red;
-        background: #ffe0e0;
-      }
-      .debug-line.success {
-        color: green;
-        border-left-color: green;
-        background: #e0ffe0;
-      }
-      .debug-line.info {
-        color: blue;
-        border-left-color: blue;
-      }
-      .debug-line.warning {
-        color: orange;
-        border-left-color: orange;
-        background: #fff5e0;
-      }
-      #app {
-        margin-top: 20px;
+      #nc-root {
+        min-height: 100vh;
       }
     </style>
   </head>
   <body>
-    <h2>Vertex Capital Admin - Debugging</h2>
-    <div id="debug"></div>
-    <div id="app"></div>
-
+    <!-- Decap CMS will render here -->
+    
+    <!-- Load Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    
     <script>
-      // Debug logging system
-      const debugDiv = document.getElementById('debug');
-      const logs = [];
-
-      function addLog(message, type = 'info') {
-        const timestamp = new Date().toLocaleTimeString();
-        const entry = `[${timestamp}] ${message}`;
-        logs.push({ message: entry, type });
-        
-        const line = document.createElement('div');
-        line.className = `debug-line ${type}`;
-        line.textContent = entry;
-        debugDiv.appendChild(line);
-        debugDiv.scrollTop = debugDiv.scrollHeight;
-        
-        console.log(`[${type.toUpperCase()}]`, message);
-      }
-
-      // Global error handler
-      window.addEventListener('error', (e) => {
-        addLog(`ERROR: ${e.message} (${e.filename}:${e.lineno})`, 'error');
-      });
-
-      window.addEventListener('unhandledrejection', (e) => {
-        addLog(`PROMISE REJECTION: ${e.reason}`, 'error');
-      });
-
-      // Start debugging
-      addLog('Page loaded, starting Decap CMS initialization...', 'info');
-      addLog(`Current URL: ${window.location.href}`, 'info');
-
-      // Monitor Decap CMS loading
-      addLog('Waiting for Decap CMS script to load...', 'warning');
-
-      window.addEventListener('load', () => {
-        addLog('Window load event fired', 'info');
-        
+      // Initialize CMS after script loads
+      window.CMS_MANUAL_INIT = true;
+      
+      // Wait for CMS to be available
+      function initCMS() {
         if (window.CMS) {
-          addLog('✓ Decap CMS object detected!', 'success');
+          window.CMS.init();
+          console.log('Decap CMS initialized');
         } else {
-          addLog('✗ Decap CMS object NOT found', 'error');
-          addLog('Checking window properties...', 'warning');
-          const keys = Object.keys(window).filter(k => k.includes('CMS') || k.includes('cms'));
-          if (keys.length > 0) {
-            addLog(`Found related properties: ${keys.join(', ')}`, 'info');
-          }
+          setTimeout(initCMS, 100);
         }
-      });
-
-      // Check script loading
-      const scriptCheck = setInterval(() => {
-        if (window.CMS) {
-          addLog('✓ CMS loaded via script tag', 'success');
-          clearInterval(scriptCheck);
-        }
-      }, 500);
-
-      // Timeout after 10 seconds
-      setTimeout(() => {
-        if (!window.CMS) {
-          addLog('✗ CMS did not load within 10 seconds', 'error');
-          clearInterval(scriptCheck);
-        }
-      }, 10000);
-    </script>
-    
-    <!-- Load Decap CMS from jsDelivr CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
-    
-    <script>
-      // Intercept all fetch requests to see what Decap is requesting
-      const originalFetch = window.fetch;
-      window.fetch = function(...args) {
-        const url = args[0];
-        const options = args[1] || {};
-        
-        // Log all config.yml-related requests
-        if (typeof url === 'string' && (url.includes('config.yml') || url.includes('config'))) {
-          addLog(`FETCH REQUEST: ${url}`, 'warning');
-          addLog(`  Method: ${options.method || 'GET'}`, 'info');
-          addLog(`  Headers: ${JSON.stringify(options.headers || {})}`, 'info');
-        }
-        
-        return originalFetch.apply(this, args).then(response => {
-          if (typeof url === 'string' && (url.includes('config.yml') || url.includes('config'))) {
-            addLog(`FETCH RESPONSE: ${url} → HTTP ${response.status}`, 'info');
-          }
-          return response;
-        }).catch(err => {
-          if (typeof url === 'string' && (url.includes('config.yml') || url.includes('config'))) {
-            addLog(`FETCH ERROR: ${url} → ${err.message}`, 'error');
-          }
-          throw err;
-        });
-      };
-
-      // Monitor initialization and debug config loading
-      function initializeCMS() {
-        if (!window.CMS) {
-          setTimeout(initializeCMS, 100);
-          return;
-        }
-        addLog('✓ Decap CMS loaded and config.yml loaded', 'success');
-        
-        // Explicit debug: fetch config.yml and log the response
-        fetch('/admin/config.yml')
-          .then(response => {
-            addLog(`Fetch /admin/config.yml: status=${response.status}`, 'info');
-            addLog(`Content-Type: ${response.headers.get('content-type')}`, 'info');
-            addLog(`Content-Length: ${response.headers.get('content-length')}`, 'info');
-            
-            if (response.status === 200) {
-              return response.text().then(text => {
-                addLog(`✓ Config file received (${text.length} bytes)`, 'success');
-                addLog(`First 100 chars: ${text.substring(0, 100)}...`, 'info');
-              });
-            } else {
-              addLog(`✗ Config fetch failed: HTTP ${response.status}`, 'error');
-              throw new Error(`HTTP ${response.status}`);
-            }
-          })
-          .catch(err => {
-            addLog(`✗ Fetch error: ${err.message}`, 'error');
-          });
       }
-
-      window.addEventListener('load', initializeCMS);
+      
+      // Start initialization when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCMS);
+      } else {
+        initCMS();
+      }
     </script>
   </body>
 </html>
