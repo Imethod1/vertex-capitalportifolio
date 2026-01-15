@@ -13,7 +13,7 @@ const Sidebar: React.FC = () => {
     { path: '/tactical-log', label: '5. Tactical Log', icon: '📝' },
     { path: '/performance', label: '6. Performance', icon: '🎯' },
     { path: '/compliance', label: '7. Compliance', icon: '✓' },
-    { path: '/admin', label: 'Admin Panel', icon: '⚙️' },
+    { path: '/portfolio-admin', label: 'Admin Panel', icon: '⚙️' },
   ];
 
   const isActive = (path: string) => location.pathname === path;

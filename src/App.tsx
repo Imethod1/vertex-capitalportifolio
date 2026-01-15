@@ -28,7 +28,7 @@ const App: React.FC = () => {
               <Route path="/tactical-log" element={<Page5TacticalLog />} />
               <Route path="/performance" element={<Page6Performance />} />
               <Route path="/compliance" element={<Page7Compliance />} />
-              <Route path="/admin" element={<AdminPortfolioManager />} />
+              <Route path="/portfolio-admin" element={<AdminPortfolioManager />} />
             </Routes>
           </main>
         </div>
