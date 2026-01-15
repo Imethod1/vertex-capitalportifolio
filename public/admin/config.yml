@@ -48,7 +48,7 @@ collections:
         format: json
         fields:
           - label: Date
-            name: date
+            name: allocationsDate
             widget: datetime
             format: YYYY-MM-DD
           - label: Allocations
@@ -71,7 +71,7 @@ collections:
                 name: rebalancingRequired
                 widget: boolean
               - label: Notes
-                name: notes
+                name: allocationNotes
                 widget: string
 
   # Securities - Individual holdings
@@ -84,7 +84,7 @@ collections:
         format: json
         fields:
           - label: Date
-            name: date
+            name: securitiesDate
             widget: datetime
             format: YYYY-MM-DD
           - label: Securities
@@ -107,7 +107,7 @@ collections:
                 name: percentOfPortfolio
                 widget: number
               - label: Notes
-                name: notes
+                name: securityNotes
                 widget: string
 
   # Risk Metrics - Risk monitoring
@@ -153,7 +153,7 @@ collections:
         format: json
         fields:
           - label: Date
-            name: date
+            name: liquidityDate
             widget: datetime
             format: YYYY-MM-DD
           - label: Liquidity Items
@@ -170,7 +170,7 @@ collections:
                 name: maximum
                 widget: number
               - label: "Current %"
-                name: current
+                name: liquidityCurrent
                 widget: number
               - label: Status
                 name: status
@@ -221,7 +221,7 @@ collections:
         format: json
         fields:
           - label: Date
-            name: date
+            name: performanceDate
             widget: datetime
             format: YYYY-MM-DD
           - label: Performance Metrics
@@ -235,7 +235,7 @@ collections:
                 name: target
                 widget: string
               - label: Current Value
-                name: current
+                name: performanceCurrent
                 widget: string
               - label: Deviation
                 name: deviation
@@ -254,7 +254,7 @@ collections:
         format: json
         fields:
           - label: Date
-            name: date
+            name: complianceDate
             widget: datetime
             format: YYYY-MM-DD
           - label: Compliance Checks
