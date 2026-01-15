@@ -16,31 +16,12 @@
     </style>
   </head>
   <body>
-    <!-- Decap CMS will render here -->
+    <!-- Decap CMS root container -->
+    <div id="nc-root"></div>
     
     <!-- Load Decap CMS -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.js"></script>
     
-    <script>
-      // Initialize CMS after script loads
-      window.CMS_MANUAL_INIT = true;
-      
-      // Wait for CMS to be available
-      function initCMS() {
-        if (window.CMS) {
-          window.CMS.init();
-          console.log('Decap CMS initialized');
-        } else {
-          setTimeout(initCMS, 100);
-        }
-      }
-      
-      // Start initialization when DOM is ready
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initCMS);
-      } else {
-        initCMS();
-      }
-    </script>
+    <!-- Decap CMS auto-initializes when script loads -->
   </body>
 </html>
