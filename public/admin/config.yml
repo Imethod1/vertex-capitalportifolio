@@ -34,7 +34,7 @@ collections:
           - label: Benchmark Index
             name: benchmark
             widget: string
-          - label: YTD Performance %
+          - label: "YTD Performance %"
             name: ytdPerformance
             widget: number
 
@@ -58,13 +58,13 @@ collections:
               - label: Asset Class
                 name: assetClass
                 widget: string
-              - label: Target %
+              - label: "Target %"
                 name: target
                 widget: number
-              - label: Current %
+              - label: "Current %"
                 name: current
                 widget: number
-              - label: Deviation %
+              - label: "Deviation %"
                 name: deviation
                 widget: number
               - label: Rebalancing Required
@@ -103,7 +103,7 @@ collections:
               - label: Value
                 name: value
                 widget: number
-              - label: % of Portfolio
+              - label: "% of Portfolio"
                 name: percentOfPortfolio
                 widget: number
               - label: Notes
@@ -169,7 +169,7 @@ collections:
               - label: Maximum
                 name: maximum
                 widget: number
-              - label: Current %
+              - label: "Current %"
                 name: current
                 widget: number
               - label: Status
