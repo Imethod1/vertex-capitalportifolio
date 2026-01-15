@@ -62,7 +62,7 @@ collections:
                 name: target
                 widget: number
               - label: "Current %"
-                name: current
+                name: allocationsCurrent
                 widget: number
               - label: "Deviation %"
                 name: deviation
@@ -193,7 +193,7 @@ collections:
         format: json
         fields:
           - label: Date
-            name: date
+            name: tacticaldDate
             widget: datetime
             format: YYYY-MM-DD
           - label: Tactical Adjustments
@@ -241,7 +241,7 @@ collections:
                 name: deviation
                 widget: string
               - label: Notes
-                name: notes
+                name: performanceNotes
                 widget: string
 
   # Compliance Checking
