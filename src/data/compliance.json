@@ -1,0 +1,47 @@
+{
+  "date": "2026-01-12",
+  "complianceChecks": [
+    {
+      "area": "Single Security Limit",
+      "ipsLimit": "≤10%",
+      "currentStatus": "Compliant",
+      "breach": false,
+      "actionRequired": ""
+    },
+    {
+      "area": "Single Sector Limit",
+      "ipsLimit": "≤25%",
+      "currentStatus": "Compliant",
+      "breach": false,
+      "actionRequired": ""
+    },
+    {
+      "area": "Regional Allocation Limit",
+      "ipsLimit": "≤10%",
+      "currentStatus": "Compliant",
+      "breach": false,
+      "actionRequired": ""
+    },
+    {
+      "area": "Drawdown Limit",
+      "ipsLimit": "≤5%",
+      "currentStatus": "Compliant",
+      "breach": false,
+      "actionRequired": ""
+    },
+    {
+      "area": "Prohibited Instruments",
+      "ipsLimit": "None",
+      "currentStatus": "Compliant",
+      "breach": false,
+      "actionRequired": ""
+    },
+    {
+      "area": "Credit Rating Compliance",
+      "ipsLimit": "≥Investment Grade",
+      "currentStatus": "Compliant",
+      "breach": false,
+      "actionRequired": ""
+    }
+  ]
+}

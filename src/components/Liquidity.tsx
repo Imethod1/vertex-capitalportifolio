@@ -83,6 +83,7 @@ export const Liquidity: React.FC<LiquidityProps> = ({ items, onUpdate }) => {
                   </td>
                   <td className="border border-gray-300 dark:border-gray-700 px-4 py-3">
                     <select
+                      aria-label="Liquidity status"
                       value={item.status}
                       onChange={(e) => handleInputChange(index, 'status', e.target.value as any)}
                       className={`px-3 py-1 rounded text-sm font-medium border-0 cursor-pointer ${statusColor}`}
@@ -95,6 +96,7 @@ export const Liquidity: React.FC<LiquidityProps> = ({ items, onUpdate }) => {
                   <td className="border border-gray-300 dark:border-gray-700 px-4 py-3">
                     <input
                       type="text"
+                      aria-label="Action needed"
                       value={item.actionNeeded}
                       onChange={(e) => handleInputChange(index, 'actionNeeded', e.target.value)}
                       className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white"

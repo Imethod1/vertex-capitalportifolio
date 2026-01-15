@@ -1,0 +1,33 @@
+{
+  "date": "2026-01-12",
+  "performanceMetrics": [
+    {
+      "metric": "Total Portfolio Return",
+      "target": "2-3% (Q1 target)",
+      "current": "0%",
+      "deviation": "0%",
+      "notes": "Target annualized return: 8-12%"
+    },
+    {
+      "metric": "Asset Class Returns",
+      "target": "Per allocation",
+      "current": "0%",
+      "deviation": "0%",
+      "notes": "Monitor each asset class separately"
+    },
+    {
+      "metric": "Benchmark-relative Return",
+      "target": "Composite Index",
+      "current": "0%",
+      "deviation": "0%",
+      "notes": "35% DSE + 5% Regional + 50% Gov Bonds + 10% T-bill"
+    },
+    {
+      "metric": "Risk-adjusted Metrics",
+      "target": "Sharpe & Sortino Ratio",
+      "current": "0",
+      "deviation": "0",
+      "notes": "Calculate monthly"
+    }
+  ]
+}

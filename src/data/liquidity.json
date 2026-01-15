@@ -1,0 +1,29 @@
+{
+  "date": "2026-01-12",
+  "liquidityItems": [
+    {
+      "item": "Cash & Cash Equivalents",
+      "minimum": 10,
+      "maximum": 15,
+      "current": 0,
+      "status": "Adequate",
+      "actionNeeded": "Monitor weekly"
+    },
+    {
+      "item": "Time to Liquidate 80% Portfolio",
+      "minimum": 0,
+      "maximum": 30,
+      "current": 0,
+      "status": "Adequate",
+      "actionNeeded": "Monitor liquidity conditions"
+    },
+    {
+      "item": "Bid-Ask Spread / Daily Volume",
+      "minimum": 0,
+      "maximum": 0,
+      "current": 0,
+      "status": "Adequate",
+      "actionNeeded": "Monitor execution efficiency"
+    }
+  ]
+}

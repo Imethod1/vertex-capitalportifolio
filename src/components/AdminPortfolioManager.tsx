@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/adminPortfolioManager.css';
 import portfolioData from '../data/portfolio.json';
+import allocationsData from '../data/allocations.json';
+import securitiesData from '../data/securities.json';
+import liquidityData from '../data/liquidity.json';
+import tacticalData from '../data/tactical.json';
+import performanceData from '../data/performance.json';
+import complianceData from '../data/compliance.json';
 import type {
   PortfolioAllocation,
   Security,
@@ -58,8 +64,18 @@ export const AdminPortfolioManager: React.FC<AdminProps> = ({ onSavePortfolio })
   useEffect(() => {
     const loadPortfolio = async () => {
       try {
-        // Use imported data directly
-        setPortfolio(portfolioData as PortfolioState);
+        // Merge all data sources into a combined portfolio state
+        const mergedPortfolio: PortfolioState = {
+          date: portfolioData.date,
+          allocations: allocationsData.allocations,
+          securities: securitiesData.securities,
+          riskMetrics: portfolioData.riskMetrics,
+          liquidityItems: liquidityData.liquidityItems,
+          tacticalAdjustments: tacticalData.tacticalAdjustments,
+          performanceMetrics: performanceData.performanceMetrics,
+          complianceChecks: complianceData.complianceChecks,
+        };
+        setPortfolio(mergedPortfolio);
         setLoading(false);
       } catch (error) {
         console.error('Error loading portfolio:', error);
@@ -143,6 +159,7 @@ export const AdminPortfolioManager: React.FC<AdminProps> = ({ onSavePortfolio })
         <input
           type="file"
           accept=".json"
+          aria-label="Import portfolio JSON file"
           onChange={(e) => {
             const file = e.target.files?.[0];
             if (file) {
@@ -162,7 +179,6 @@ export const AdminPortfolioManager: React.FC<AdminProps> = ({ onSavePortfolio })
               reader.readAsText(file);
             }
           }}
-          style={{ display: 'none' }}
           id="import-file"
         />
         <button
@@ -312,6 +328,7 @@ const AllocationEditor: React.FC<AllocationEditorProps> = ({ allocations, onChan
             <tr key={idx}>
               <td>
                 <select
+                  aria-label="Asset class"
                   value={alloc.assetClass}
                   onChange={(e) =>
                     handleUpdate(idx, 'assetClass', e.target.value as AssetClass)
@@ -328,6 +345,7 @@ const AllocationEditor: React.FC<AllocationEditorProps> = ({ allocations, onChan
               <td>
                 <input
                   type="number"
+                  aria-label="Target allocation percentage"
                   value={alloc.target}
                   onChange={(e) => handleUpdate(idx, 'target', parseFloat(e.target.value))}
                   step="0.1"
@@ -338,6 +356,7 @@ const AllocationEditor: React.FC<AllocationEditorProps> = ({ allocations, onChan
               <td>
                 <input
                   type="number"
+                  aria-label="Current allocation percentage"
                   value={alloc.current}
                   onChange={(e) => handleUpdate(idx, 'current', parseFloat(e.target.value))}
                   step="0.1"
@@ -351,6 +370,7 @@ const AllocationEditor: React.FC<AllocationEditorProps> = ({ allocations, onChan
               <td>
                 <input
                   type="checkbox"
+                  aria-label="Rebalancing required"
                   checked={alloc.rebalancingRequired}
                   onChange={(e) =>
                     handleUpdate(idx, 'rebalancingRequired', e.target.checked)
@@ -360,6 +380,7 @@ const AllocationEditor: React.FC<AllocationEditorProps> = ({ allocations, onChan
               <td>
                 <input
                   type="text"
+                  aria-label="Allocation notes"
                   value={alloc.notes}
                   onChange={(e) => handleUpdate(idx, 'notes', e.target.value)}
                   placeholder="Notes"
@@ -441,6 +462,7 @@ const SecuritiesEditor: React.FC<SecuritiesEditorProps> = ({ securities, onChang
                     <label>Name</label>
                     <input
                       type="text"
+                      aria-label="Security name"
                       value={security.name}
                       onChange={(e) => handleUpdate(security.id, 'name', e.target.value)}
                     />
@@ -450,6 +472,7 @@ const SecuritiesEditor: React.FC<SecuritiesEditorProps> = ({ securities, onChang
                     <label>Ticker</label>
                     <input
                       type="text"
+                      aria-label="Security ticker symbol"
                       value={security.ticker}
                       onChange={(e) => handleUpdate(security.id, 'ticker', e.target.value)}
                     />
@@ -458,6 +481,7 @@ const SecuritiesEditor: React.FC<SecuritiesEditorProps> = ({ securities, onChang
                   <div className="form-group">
                     <label>Asset Class</label>
                     <select
+                      aria-label="Security asset class"
                       value={security.assetClass}
                       onChange={(e) =>
                         handleUpdate(security.id, 'assetClass', e.target.value as AssetClass)
@@ -474,6 +498,7 @@ const SecuritiesEditor: React.FC<SecuritiesEditorProps> = ({ securities, onChang
                   <div className="form-group">
                     <label>Sector</label>
                     <select
+                      aria-label="Security sector"
                       value={security.sector}
                       onChange={(e) =>
                         handleUpdate(security.id, 'sector', e.target.value as Sector)
@@ -490,6 +515,7 @@ const SecuritiesEditor: React.FC<SecuritiesEditorProps> = ({ securities, onChang
                   <div className="form-group">
                     <label>Geographic Exposure</label>
                     <select
+                      aria-label="Geographic exposure region"
                       value={security.geographicExposure}
                       onChange={(e) =>
                         handleUpdate(security.id, 'geographicExposure', e.target.value as GeographicExposure)
@@ -507,6 +533,7 @@ const SecuritiesEditor: React.FC<SecuritiesEditorProps> = ({ securities, onChang
                     <label>Quantity</label>
                     <input
                       type="number"
+                      aria-label="Security quantity"
                       value={security.quantity}
                       onChange={(e) =>
                         handleUpdate(security.id, 'quantity', parseFloat(e.target.value))
@@ -519,6 +546,7 @@ const SecuritiesEditor: React.FC<SecuritiesEditorProps> = ({ securities, onChang
                     <label>Purchase Price (TZS)</label>
                     <input
                       type="number"
+                      aria-label="Purchase price in TZS"
                       value={security.purchasePrice}
                       onChange={(e) =>
                         handleUpdate(security.id, 'purchasePrice', parseFloat(e.target.value))
@@ -531,6 +559,7 @@ const SecuritiesEditor: React.FC<SecuritiesEditorProps> = ({ securities, onChang
                     <label>Current Price (TZS)</label>
                     <input
                       type="number"
+                      aria-label="Current price in TZS"
                       value={security.currentPrice}
                       onChange={(e) =>
                         handleUpdate(security.id, 'currentPrice', parseFloat(e.target.value))
@@ -543,6 +572,7 @@ const SecuritiesEditor: React.FC<SecuritiesEditorProps> = ({ securities, onChang
                     <label>Current Weight %</label>
                     <input
                       type="number"
+                      aria-label="Current weight percentage"
                       value={security.currentWeight}
                       onChange={(e) =>
                         handleUpdate(security.id, 'currentWeight', parseFloat(e.target.value))
@@ -557,6 +587,7 @@ const SecuritiesEditor: React.FC<SecuritiesEditorProps> = ({ securities, onChang
                     <label>Target Weight %</label>
                     <input
                       type="number"
+                      aria-label="Target weight percentage"
                       value={security.targetWeight}
                       onChange={(e) =>
                         handleUpdate(security.id, 'targetWeight', parseFloat(e.target.value))
@@ -571,6 +602,7 @@ const SecuritiesEditor: React.FC<SecuritiesEditorProps> = ({ securities, onChang
                     <label>IPS Compliant</label>
                     <input
                       type="checkbox"
+                      aria-label="IPS compliant status"
                       checked={security.ipsCompliant}
                       onChange={(e) =>
                         handleUpdate(security.id, 'ipsCompliant', e.target.checked)
@@ -581,6 +613,7 @@ const SecuritiesEditor: React.FC<SecuritiesEditorProps> = ({ securities, onChang
                   <div className="form-group">
                     <label>Notes</label>
                     <textarea
+                      aria-label="Security notes"
                       value={security.notes}
                       onChange={(e) => handleUpdate(security.id, 'notes', e.target.value)}
                       rows={2}
@@ -657,6 +690,7 @@ const RiskMetricsEditor: React.FC<RiskMetricsEditorProps> = ({ metrics, onChange
               <td>
                 <input
                   type="text"
+                  aria-label="Risk metric name"
                   value={metric.metric}
                   onChange={(e) => handleUpdate(idx, 'metric', e.target.value)}
                 />
@@ -664,6 +698,7 @@ const RiskMetricsEditor: React.FC<RiskMetricsEditorProps> = ({ metrics, onChange
               <td>
                 <input
                   type="text"
+                  aria-label="IPS limit"
                   value={metric.ipsLimit}
                   onChange={(e) => handleUpdate(idx, 'ipsLimit', e.target.value)}
                   placeholder="e.g., ≤10%"
@@ -672,12 +707,14 @@ const RiskMetricsEditor: React.FC<RiskMetricsEditorProps> = ({ metrics, onChange
               <td>
                 <input
                   type="text"
+                  aria-label="Current metric value"
                   value={metric.currentValue}
                   onChange={(e) => handleUpdate(idx, 'currentValue', e.target.value)}
                 />
               </td>
               <td>
                 <select
+                  aria-label="Compliance status"
                   value={metric.status}
                   onChange={(e) =>
                     handleUpdate(idx, 'status', e.target.value as any)
@@ -691,6 +728,7 @@ const RiskMetricsEditor: React.FC<RiskMetricsEditorProps> = ({ metrics, onChange
               <td>
                 <input
                   type="text"
+                  aria-label="Action required for metric"
                   value={metric.actionRequired}
                   onChange={(e) => handleUpdate(idx, 'actionRequired', e.target.value)}
                   placeholder="Action needed"
@@ -768,6 +806,7 @@ const LiquidityEditor: React.FC<LiquidityEditorProps> = ({ items, onChange }) =>
               <td>
                 <input
                   type="text"
+                  aria-label="Liquidity item name"
                   value={item.item}
                   onChange={(e) => handleUpdate(idx, 'item', e.target.value)}
                 />
@@ -775,6 +814,7 @@ const LiquidityEditor: React.FC<LiquidityEditorProps> = ({ items, onChange }) =>
               <td>
                 <input
                   type="number"
+                  aria-label="Minimum percentage"
                   value={item.minimum}
                   onChange={(e) => handleUpdate(idx, 'minimum', parseFloat(e.target.value))}
                   step="0.1"
@@ -783,6 +823,7 @@ const LiquidityEditor: React.FC<LiquidityEditorProps> = ({ items, onChange }) =>
               <td>
                 <input
                   type="number"
+                  aria-label="Maximum percentage"
                   value={item.maximum}
                   onChange={(e) => handleUpdate(idx, 'maximum', parseFloat(e.target.value))}
                   step="0.1"
@@ -791,6 +832,7 @@ const LiquidityEditor: React.FC<LiquidityEditorProps> = ({ items, onChange }) =>
               <td>
                 <input
                   type="number"
+                  aria-label="Current percentage"
                   value={item.current}
                   onChange={(e) => handleUpdate(idx, 'current', parseFloat(e.target.value))}
                   step="0.1"
@@ -798,6 +840,7 @@ const LiquidityEditor: React.FC<LiquidityEditorProps> = ({ items, onChange }) =>
               </td>
               <td>
                 <select
+                  aria-label="Liquidity status"
                   value={item.status}
                   onChange={(e) => handleUpdate(idx, 'status', e.target.value as any)}
                 >
@@ -809,6 +852,7 @@ const LiquidityEditor: React.FC<LiquidityEditorProps> = ({ items, onChange }) =>
               <td>
                 <input
                   type="text"
+                  aria-label="Action needed for liquidity"
                   value={item.actionNeeded}
                   onChange={(e) => handleUpdate(idx, 'actionNeeded', e.target.value)}
                   placeholder="Action needed"
@@ -894,6 +938,7 @@ const TacticalEditor: React.FC<TacticalEditorProps> = ({ adjustments, onChange }
                     <label>Date</label>
                     <input
                       type="date"
+                      aria-label="Adjustment date"
                       value={adj.date}
                       onChange={(e) => handleUpdate(adj.id, 'date', e.target.value)}
                     />
@@ -903,6 +948,7 @@ const TacticalEditor: React.FC<TacticalEditorProps> = ({ adjustments, onChange }
                     <label>Tactical Move</label>
                     <input
                       type="text"
+                      aria-label="Tactical move description"
                       value={adj.tacticalMove}
                       onChange={(e) => handleUpdate(adj.id, 'tacticalMove', e.target.value)}
                     />
@@ -912,6 +958,7 @@ const TacticalEditor: React.FC<TacticalEditorProps> = ({ adjustments, onChange }
                     <label>Deviation %</label>
                     <input
                       type="number"
+                      aria-label="Deviation percentage"
                       value={adj.deviationPercent}
                       onChange={(e) =>
                         handleUpdate(adj.id, 'deviationPercent', parseFloat(e.target.value))
@@ -924,6 +971,7 @@ const TacticalEditor: React.FC<TacticalEditorProps> = ({ adjustments, onChange }
                     <label>Market Signal</label>
                     <input
                       type="text"
+                      aria-label="Market signal"
                       value={adj.marketSignal}
                       onChange={(e) => handleUpdate(adj.id, 'marketSignal', e.target.value)}
                       placeholder="e.g., Rising interest rates"
@@ -934,6 +982,7 @@ const TacticalEditor: React.FC<TacticalEditorProps> = ({ adjustments, onChange }
                     <label>Duration</label>
                     <input
                       type="text"
+                      aria-label="Adjustment duration"
                       value={adj.duration}
                       onChange={(e) => handleUpdate(adj.id, 'duration', e.target.value)}
                       placeholder="e.g., 2 weeks"
@@ -944,6 +993,7 @@ const TacticalEditor: React.FC<TacticalEditorProps> = ({ adjustments, onChange }
                     <label>Approved By (Initials)</label>
                     <input
                       type="text"
+                      aria-label="Approved by initials"
                       value={adj.approvedBy}
                       onChange={(e) => handleUpdate(adj.id, 'approvedBy', e.target.value)}
                       placeholder="IC / PM initials"
@@ -954,6 +1004,7 @@ const TacticalEditor: React.FC<TacticalEditorProps> = ({ adjustments, onChange }
                   <div className="form-group full-width">
                     <label>Notes</label>
                     <textarea
+                      aria-label="Adjustment notes"
                       value={adj.notes}
                       onChange={(e) => handleUpdate(adj.id, 'notes', e.target.value)}
                       rows={3}
@@ -1030,6 +1081,7 @@ const PerformanceEditor: React.FC<PerformanceEditorProps> = ({ metrics, onChange
               <td>
                 <input
                   type="text"
+                  aria-label="Performance metric name"
                   value={metric.metric}
                   onChange={(e) => handleUpdate(idx, 'metric', e.target.value)}
                 />
@@ -1037,6 +1089,7 @@ const PerformanceEditor: React.FC<PerformanceEditorProps> = ({ metrics, onChange
               <td>
                 <input
                   type="text"
+                  aria-label="Target or benchmark value"
                   value={metric.target}
                   onChange={(e) => handleUpdate(idx, 'target', e.target.value)}
                 />
@@ -1044,6 +1097,7 @@ const PerformanceEditor: React.FC<PerformanceEditorProps> = ({ metrics, onChange
               <td>
                 <input
                   type="text"
+                  aria-label="Current metric value"
                   value={metric.current}
                   onChange={(e) => handleUpdate(idx, 'current', e.target.value)}
                 />
@@ -1051,6 +1105,7 @@ const PerformanceEditor: React.FC<PerformanceEditorProps> = ({ metrics, onChange
               <td>
                 <input
                   type="text"
+                  aria-label="Deviation from target"
                   value={metric.deviation}
                   onChange={(e) => handleUpdate(idx, 'deviation', e.target.value)}
                 />
@@ -1058,6 +1113,7 @@ const PerformanceEditor: React.FC<PerformanceEditorProps> = ({ metrics, onChange
               <td>
                 <input
                   type="text"
+                  aria-label="Performance metric notes"
                   value={metric.notes}
                   onChange={(e) => handleUpdate(idx, 'notes', e.target.value)}
                   placeholder="Notes"
@@ -1133,6 +1189,7 @@ const ComplianceEditor: React.FC<ComplianceEditorProps> = ({ checks, onChange })
               <td>
                 <input
                   type="text"
+                  aria-label="Compliance area"
                   value={check.area}
                   onChange={(e) => handleUpdate(idx, 'area', e.target.value)}
                 />
@@ -1140,6 +1197,7 @@ const ComplianceEditor: React.FC<ComplianceEditorProps> = ({ checks, onChange })
               <td>
                 <input
                   type="text"
+                  aria-label="IPS limit or rule"
                   value={check.ipsLimit}
                   onChange={(e) => handleUpdate(idx, 'ipsLimit', e.target.value)}
                   placeholder="e.g., ≤10%"
@@ -1148,6 +1206,7 @@ const ComplianceEditor: React.FC<ComplianceEditorProps> = ({ checks, onChange })
               <td>
                 <input
                   type="text"
+                  aria-label="Current compliance status"
                   value={check.currentStatus}
                   onChange={(e) => handleUpdate(idx, 'currentStatus', e.target.value)}
                 />
@@ -1155,6 +1214,7 @@ const ComplianceEditor: React.FC<ComplianceEditorProps> = ({ checks, onChange })
               <td>
                 <input
                   type="checkbox"
+                  aria-label="Breach indicator"
                   checked={check.breach}
                   onChange={(e) => handleUpdate(idx, 'breach', e.target.checked)}
                 />
@@ -1162,6 +1222,7 @@ const ComplianceEditor: React.FC<ComplianceEditorProps> = ({ checks, onChange })
               <td>
                 <input
                   type="text"
+                  aria-label="Action required for compliance"
                   value={check.actionRequired}
                   onChange={(e) => handleUpdate(idx, 'actionRequired', e.target.value)}
                   placeholder="Action needed"

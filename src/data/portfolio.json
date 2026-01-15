@@ -3,33 +3,33 @@
   "allocations": [
     {
       "assetClass": "Fixed Income",
-      "targetPercent": 50,
-      "currentPercent": 0,
-      "deviationPercent": 0,
+      "target": 50,
+      "current": 0,
+      "deviation": 0,
       "rebalancingRequired": false,
       "notes": "Government and investment-grade corporate bonds"
     },
     {
       "assetClass": "Domestic Equities",
-      "targetPercent": 35,
-      "currentPercent": 0,
-      "deviationPercent": 0,
+      "target": 35,
+      "current": 0,
+      "deviation": 0,
       "rebalancingRequired": false,
       "notes": "DSE-listed equities"
     },
     {
       "assetClass": "Regional (EAC/SADC) Equities",
-      "targetPercent": 5,
-      "currentPercent": 0,
-      "deviationPercent": 0,
+      "target": 5,
+      "current": 0,
+      "deviation": 0,
       "rebalancingRequired": false,
       "notes": "Large-cap liquid issuers"
     },
     {
       "assetClass": "Cash & Cash Equivalents",
-      "targetPercent": 10,
-      "currentPercent": 0,
-      "deviationPercent": 0,
+      "target": 10,
+      "current": 0,
+      "deviation": 0,
       "rebalancingRequired": false,
       "notes": "Treasury bills and bank deposits"
     }
@@ -37,49 +37,49 @@
   "securities": [],
   "riskMetrics": [
     {
-      "metricName": "Single Security Exposure",
+      "metric": "Single Security Exposure",
       "ipsLimit": "≤10%",
       "currentValue": "0%",
       "status": "Compliant",
       "actionRequired": ""
     },
     {
-      "metricName": "Single Sector Exposure",
+      "metric": "Single Sector Exposure",
       "ipsLimit": "≤25%",
       "currentValue": "0%",
       "status": "Compliant",
       "actionRequired": ""
     },
     {
-      "metricName": "Regional Allocation",
+      "metric": "Regional Allocation",
       "ipsLimit": "≤10%",
       "currentValue": "0%",
       "status": "Compliant",
       "actionRequired": ""
     },
     {
-      "metricName": "Weighted Portfolio Duration",
+      "metric": "Weighted Portfolio Duration",
       "ipsLimit": "≤2 yrs",
       "currentValue": "0 yrs",
       "status": "Compliant",
       "actionRequired": ""
     },
     {
-      "metricName": "Portfolio Volatility",
+      "metric": "Portfolio Volatility",
       "ipsLimit": "5-7% ann.",
       "currentValue": "0%",
       "status": "Compliant",
       "actionRequired": ""
     },
     {
-      "metricName": "Drawdown Limit",
+      "metric": "Drawdown Limit",
       "ipsLimit": "≤5%",
       "currentValue": "0%",
       "status": "Compliant",
       "actionRequired": ""
     },
     {
-      "metricName": "Credit Rating Compliance",
+      "metric": "Credit Rating Compliance",
       "ipsLimit": "≥Investment Grade",
       "currentValue": "N/A",
       "status": "Compliant",
@@ -89,98 +89,101 @@
   "liquidityItems": [
     {
       "item": "Cash & Cash Equivalents",
-      "minimumMaximum": "10-15%",
-      "currentPercent": 0,
-      "liquidityStatus": "Pending",
+      "minimum": 10,
+      "maximum": 15,
+      "current": 0,
+      "status": "Adequate",
       "actionNeeded": "Monitor weekly"
     },
     {
       "item": "Time to Liquidate 80% Portfolio",
-      "minimumMaximum": "≤30 days",
-      "currentPercent": 0,
-      "liquidityStatus": "N/A",
+      "minimum": 0,
+      "maximum": 30,
+      "current": 0,
+      "status": "Adequate",
       "actionNeeded": "Monitor liquidity conditions"
     },
     {
       "item": "Bid-Ask Spread / Daily Volume",
-      "minimumMaximum": "Adequate for execution",
-      "currentPercent": 0,
-      "liquidityStatus": "Pending",
+      "minimum": 0,
+      "maximum": 0,
+      "current": 0,
+      "status": "Adequate",
       "actionNeeded": "Monitor execution efficiency"
     }
   ],
   "tacticalAdjustments": [],
   "performanceMetrics": [
     {
-      "metricName": "Total Portfolio Return",
-      "targetBenchmark": "2-3% (Q1 target)",
-      "currentValue": "0%",
+      "metric": "Total Portfolio Return",
+      "target": "2-3% (Q1 target)",
+      "current": "0%",
       "deviation": "0%",
       "notes": "Target annualized return: 8-12%"
     },
     {
-      "metricName": "Asset Class Returns",
-      "targetBenchmark": "Per allocation",
-      "currentValue": "0%",
+      "metric": "Asset Class Returns",
+      "target": "Per allocation",
+      "current": "0%",
       "deviation": "0%",
       "notes": "Monitor each asset class separately"
     },
     {
-      "metricName": "Benchmark-relative Return",
-      "targetBenchmark": "Composite Index",
-      "currentValue": "0%",
+      "metric": "Benchmark-relative Return",
+      "target": "Composite Index",
+      "current": "0%",
       "deviation": "0%",
       "notes": "35% DSE + 5% Regional + 50% Gov Bonds + 10% T-bill"
     },
     {
-      "metricName": "Risk-adjusted Metrics",
-      "targetBenchmark": "Sharpe & Sortino Ratio",
-      "currentValue": "0",
+      "metric": "Risk-adjusted Metrics",
+      "target": "Sharpe & Sortino Ratio",
+      "current": "0",
       "deviation": "0",
       "notes": "Calculate monthly"
     }
   ],
   "complianceChecks": [
     {
-      "complianceArea": "Single Security Limit",
-      "ipsLimitRule": "≤10%",
+      "area": "Single Security Limit",
+      "ipsLimit": "≤10%",
       "currentStatus": "Compliant",
-      "breach": "No",
+      "breach": false,
       "actionRequired": ""
     },
     {
-      "complianceArea": "Single Sector Limit",
-      "ipsLimitRule": "≤25%",
+      "area": "Single Sector Limit",
+      "ipsLimit": "≤25%",
       "currentStatus": "Compliant",
-      "breach": "No",
+      "breach": false,
       "actionRequired": ""
     },
     {
-      "complianceArea": "Regional Allocation Limit",
-      "ipsLimitRule": "≤10%",
+      "area": "Regional Allocation Limit",
+      "ipsLimit": "≤10%",
       "currentStatus": "Compliant",
-      "breach": "No",
+      "breach": false,
       "actionRequired": ""
     },
     {
-      "complianceArea": "Drawdown Limit",
-      "ipsLimitRule": "≤5%",
+      "area": "Drawdown Limit",
+      "ipsLimit": "≤5%",
       "currentStatus": "Compliant",
-      "breach": "No",
+      "breach": false,
       "actionRequired": ""
     },
     {
-      "complianceArea": "Prohibited Instruments",
-      "ipsLimitRule": "None",
+      "area": "Prohibited Instruments",
+      "ipsLimit": "None",
       "currentStatus": "Compliant",
-      "breach": "No",
+      "breach": false,
       "actionRequired": ""
     },
     {
-      "complianceArea": "Credit Rating Compliance",
-      "ipsLimitRule": "≥Investment Grade",
+      "area": "Credit Rating Compliance",
+      "ipsLimit": "≥Investment Grade",
       "currentStatus": "Compliant",
-      "breach": "No",
+      "breach": false,
       "actionRequired": ""
     }
   ]
