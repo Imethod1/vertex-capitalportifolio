@@ -10,7 +10,31 @@
     <!-- Decap CMS root container -->
     <div id="nc-root"></div>
 
-    <!-- Decap CMS from CDN -->
+    <!-- Configure Decap CMS before loading -->
+    <script>
+      // Tell Decap CMS to manually init and where to find config
+      window.CMS_MANUAL_INIT = true;
+      window.CMS_CONFIG_URL = '/admin/config.yml';
+    </script>
+
+    <!-- Load Decap CMS from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
+
+    <!-- Initialize Decap CMS when loaded -->
+    <script>
+      (function initCMS() {
+        if (window.CMS && window.CMS.init) {
+          try {
+            window.CMS.init();
+            console.log('Decap CMS initialized successfully');
+          } catch (error) {
+            console.error('Error initializing Decap CMS:', error);
+          }
+        } else {
+          // Retry if CMS not ready
+          setTimeout(initCMS, 100);
+        }
+      })();
+    </script>
   </body>
 </html>
