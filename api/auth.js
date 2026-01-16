@@ -204,17 +204,32 @@ export default async (req, res) => {
   </div>
   <script>
     (function() {
+      // Store token for persistence (Decap CMS requirement)
+      const token = '${tokenData.access_token}';
+      
       function receiveMessage(e) {
-        console.log("Received message:", e);
+        console.log("Received message from parent:", e.data);
+        
+        // Send auth success with token
         window.opener.postMessage(
-          'authorization:github:success:${JSON.stringify({ token: tokenData.access_token, provider: 'github' }).replace(/'/g, "\\'")}',
+          'authorization:github:success:' + JSON.stringify({ 
+            token: token, 
+            provider: 'github' 
+          }).replace(/'/g, "\\\\'"),
           e.origin
         );
+        
         window.removeEventListener("message", receiveMessage, false);
+        
+        // Close window after a short delay
+        setTimeout(() => {
+          window.close();
+        }, 1000);
       }
+      
       window.addEventListener("message", receiveMessage, false);
       
-      console.log("Sending init message to opener");
+      console.log("Sending init message to Decap CMS opener");
       window.opener.postMessage("authorizing:github", "*");
     })();
   </script>

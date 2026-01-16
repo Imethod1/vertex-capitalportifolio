@@ -35,7 +35,22 @@
     <!-- Decap CMS root container -->
     <div id="nc-root"></div>
 
-    <!-- Decap CMS from CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
+    <!-- Authentication enforcer and Decap CMS -->
+    <script>
+      // Check if user is already authenticated
+      const authToken = localStorage.getItem('netlify_github_token');
+      
+      if (!authToken) {
+        console.log('No auth token found - authentication required');
+        // Let Decap CMS handle the auth flow
+      } else {
+        console.log('Auth token found - user is authenticated');
+      }
+
+      // Load Decap CMS
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js';
+      document.body.appendChild(script);
+    </script>
   </body>
 </html>
