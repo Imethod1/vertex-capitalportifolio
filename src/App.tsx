@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
+import Footer from './components/Footer';
 import Page1AllocationSnapshot from './pages/Page1AllocationSnapshot';
 import Page2SecurityExposure from './pages/Page2SecurityExposure';
 import Page3RiskMetrics from './pages/Page3RiskMetrics';
@@ -30,6 +31,7 @@ const App: React.FC = () => {
             </Routes>
           </main>
         </div>
+        <Footer />
       </div>
     </Router>
   );
