@@ -171,18 +171,7 @@ const Page6Performance: React.FC = () => {
           </div>
         </div>
 
-        {/* Analysis Instructions */}
-        <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-          <h3 className="font-semibold text-green-900 mb-3">📈 How to Update Performance Data</h3>
-          <ul className="text-sm text-green-800 space-y-2">
-            <li>• Go to <strong>https://vertex-capitalportifolio.vercel.app/admin</strong></li>
-            <li>• Login with your GitHub credentials</li>
-            <li>• Click "Performance Metrics" and update returns</li>
-            <li>• System automatically calculates outperformance vs benchmarks</li>
-            <li>• Changes will auto-rebuild and appear here within 1-2 minutes</li>
-            <li>• Monitor risk-adjusted metrics (Sharpe, Sortino) for portfolio quality</li>
-          </ul>
-        </div>
+
       </div>
     </div>
   );

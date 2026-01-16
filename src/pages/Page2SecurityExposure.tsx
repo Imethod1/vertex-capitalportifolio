@@ -80,18 +80,6 @@ const Page2SecurityExposure: React.FC = () => {
 
         {/* Security Exposure Table */}
         <SecurityExposure securities={securities} />
-
-        {/* Compliance Rules */}
-        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h3 className="font-semibold text-blue-900 mb-3">📋 How to Update Securities</h3>
-          <ul className="text-sm text-blue-800 space-y-2">
-            <li>• Go to <strong>https://vertex-capitalportifolio.vercel.app/admin</strong></li>
-            <li>• Login with your GitHub credentials</li>
-            <li>• Click "Portfolio Data" and edit individual securities</li>
-            <li>• Changes will auto-rebuild and appear here within 1-2 minutes</li>
-            <li>• System automatically validates IPS compliance rules (≤10% single position, ≤25% sector)</li>
-          </ul>
-        </div>
       </div>
     </div>
   );

@@ -86,18 +86,7 @@ const Page5TacticalLog: React.FC = () => {
           </table>
         </div>
 
-        {/* Tactical Approval Status Info */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-          <h3 className="font-semibold text-blue-900 mb-3">📋 How to Log Tactical Adjustments</h3>
-          <ul className="text-sm text-blue-800 space-y-2">
-            <li>• Go to <strong>https://vertex-capitalportifolio.vercel.app/admin</strong></li>
-            <li>• Login with your GitHub credentials</li>
-            <li>• Click "Tactical Log" and add new adjustments</li>
-            <li>• Include market rationale, duration, and approver (IC/PM)</li>
-            <li>• Changes will auto-rebuild and appear here within 1-2 minutes</li>
-            <li>• System maintains audit trail for all decisions</li>
-          </ul>
-        </div>
+
 
         {/* Decision Workflow Info */}
         <div className="mt-8 bg-white rounded-lg border border-gray-200 p-6">
