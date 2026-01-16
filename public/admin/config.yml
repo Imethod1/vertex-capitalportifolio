@@ -10,7 +10,9 @@ publish_mode: editorial_workflow
 
 # Require authentication for all users
 login: true
-auth_required: truemedia_folder: public/images
+auth_required: true
+
+media_folder: public/images
 public_folder: /images
 
 collections:

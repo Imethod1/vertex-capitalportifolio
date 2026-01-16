@@ -10,22 +10,7 @@
     <!-- Decap CMS root container -->
     <div id="nc-root"></div>
 
-    <!-- Load Decap CMS from CDN -->
+    <!-- Decap CMS from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
-
-    <!-- Initialize Decap CMS after it loads -->
-    <script>
-      // Wait for Decap CMS to load, then initialize it
-      (function initCMS() {
-        if (window.CMS) {
-          // CMS is available, initialize it
-          window.CMS.init();
-          console.log('Decap CMS initialized successfully');
-        } else {
-          // CMS not ready yet, try again in 100ms
-          setTimeout(initCMS, 100);
-        }
-      })();
-    </script>
   </body>
 </html>
