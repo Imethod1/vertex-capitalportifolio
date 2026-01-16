@@ -10,11 +10,11 @@
     <!-- Decap CMS root container -->
     <div id="nc-root"></div>
 
-    <!-- Configure Decap CMS before loading -->
+    <!-- Configure Decap CMS to find config in same directory -->
     <script>
-      // Tell Decap CMS to manually init and where to find config
+      // Set config URL to look for config.yml in same directory as this file (/admin/)
       window.CMS_MANUAL_INIT = true;
-      window.CMS_CONFIG_URL = '/admin/config.yml';
+      window.CMS_CONFIG_URL = './config.yml';
     </script>
 
     <!-- Load Decap CMS from CDN -->
@@ -26,7 +26,7 @@
         if (window.CMS && window.CMS.init) {
           try {
             window.CMS.init();
-            console.log('Decap CMS initialized successfully');
+            console.log('Decap CMS initialized successfully with config from: ./config.yml');
           } catch (error) {
             console.error('Error initializing Decap CMS:', error);
           }
