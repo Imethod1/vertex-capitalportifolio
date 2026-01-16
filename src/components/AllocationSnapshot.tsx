@@ -13,7 +13,7 @@ export const AllocationSnapshot: React.FC<AllocationSnapshotProps> = ({ allocati
           Portfolio Allocation Snapshot
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          Current portfolio allocations and strategic targets (read-only).
+          Current portfolio allocations and strategic targets.
         </p>
       </div>
 
@@ -74,11 +74,7 @@ export const AllocationSnapshot: React.FC<AllocationSnapshotProps> = ({ allocati
         </table>
       </div>
 
-      <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
-        <p className="text-sm text-blue-800 dark:text-blue-200">
-          <strong>Data is read-only.</strong> To update allocations, use the Decap CMS admin panel.
-        </p>
-      </div>
+
     </div>
   );
 };

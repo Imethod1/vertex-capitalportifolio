@@ -13,7 +13,7 @@ export const SecurityExposure: React.FC<SecurityExposureProps> = ({ securities }
           Individual Security Exposure
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          Track positions, IPS compliance, and sector/geography distribution (read-only).
+          Track positions, IPS compliance, and sector/geography distribution.
         </p>
       </div>
 
@@ -98,11 +98,7 @@ export const SecurityExposure: React.FC<SecurityExposureProps> = ({ securities }
         </div>
       )}
 
-      <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
-        <p className="text-sm text-blue-800 dark:text-blue-200">
-          <strong>Data is read-only.</strong> To add or update securities, use the Decap CMS admin panel.
-        </p>
-      </div>
+
     </div>
   );
 };
