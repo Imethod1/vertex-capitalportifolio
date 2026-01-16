@@ -65,7 +65,7 @@ const Page6Performance: React.FC = () => {
       <Navigation
         pageNumber={6}
         pageTitle="Performance Monitoring"
-        pageDescription="Track portfolio returns against benchmarks and IPS targets (read-only, managed via Decap CMS)"
+        pageDescription="Track portfolio returns against benchmarks and IPS targets"
       />
 
       <div className="max-w-7xl mx-auto px-6 py-8">

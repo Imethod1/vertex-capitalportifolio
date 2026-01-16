@@ -56,7 +56,7 @@ const Page7Compliance: React.FC = () => {
       <Navigation
         pageNumber={7}
         pageTitle="Compliance & IPS Adherence"
-        pageDescription="Confirm ongoing compliance with all IPS limits, rules, and restrictions (read-only, managed via Decap CMS)"
+        pageDescription="Confirm ongoing compliance with all IPS limits, rules, and restrictions"
       />
 
       <div className="max-w-7xl mx-auto px-6 py-8">

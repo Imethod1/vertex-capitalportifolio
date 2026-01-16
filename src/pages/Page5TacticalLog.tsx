@@ -23,7 +23,7 @@ const Page5TacticalLog: React.FC = () => {
       <Navigation
         pageNumber={5}
         pageTitle="Tactical Adjustment Log"
-        pageDescription="Document all short-term deviations from strategic allocation with audit trail (read-only, managed via Decap CMS)"
+        pageDescription="Document all short-term deviations from strategic allocation with audit trail"
       />
 
       <div className="max-w-7xl mx-auto px-6 py-8">

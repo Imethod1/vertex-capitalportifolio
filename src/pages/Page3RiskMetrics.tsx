@@ -70,7 +70,7 @@ const Page3RiskMetrics: React.FC = () => {
       <Navigation
         pageNumber={3}
         pageTitle="Risk & Concentration Metrics"
-        pageDescription="Monitor overall portfolio risk exposure and IPS compliance with thresholds (read-only, managed via Decap CMS)"
+        pageDescription="Monitor overall portfolio risk exposure and IPS compliance with thresholds"
       />
 
       <div className="max-w-7xl mx-auto px-6 py-8">

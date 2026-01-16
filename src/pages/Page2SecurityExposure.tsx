@@ -44,7 +44,7 @@ const Page2SecurityExposure: React.FC = () => {
       <Navigation
         pageNumber={2}
         pageTitle="Individual Security Exposure"
-        pageDescription="Track individual security positions, weights, and IPS compliance (read-only, managed via Decap CMS)"
+        pageDescription="Track individual security positions, weights, and IPS compliance"
       />
 
       <div className="max-w-7xl mx-auto px-6 py-8">

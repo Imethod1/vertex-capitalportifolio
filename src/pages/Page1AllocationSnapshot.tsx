@@ -54,7 +54,7 @@ const Page1AllocationSnapshot: React.FC = () => {
       <Navigation
         pageNumber={1}
         pageTitle="Portfolio Allocation Snapshot"
-        pageDescription="Track strategic vs actual asset allocations (read-only, managed via Decap CMS)"
+        pageDescription="Track strategic vs actual asset allocations"
       />
 
       <div className="max-w-7xl mx-auto px-6 py-8">

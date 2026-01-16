@@ -34,7 +34,7 @@ const Page4LiquidityCash: React.FC = () => {
       <Navigation
         pageNumber={4}
         pageTitle="Liquidity & Cash Management"
-        pageDescription="Ensure sufficient cash for operations and manage liquidity risks (read-only, managed via Decap CMS)"
+        pageDescription="Ensure sufficient cash for operations and manage liquidity risks"
       />
 
       <div className="max-w-7xl mx-auto px-6 py-8">
