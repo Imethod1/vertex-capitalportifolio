@@ -76,17 +76,6 @@ const Page1AllocationSnapshot: React.FC = () => {
 
         {/* Allocation Table */}
         <AllocationSnapshot allocations={allocations} />
-
-        {/* Instructions */}
-        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h3 className="font-semibold text-blue-900 mb-3">📋 How to Update Data</h3>
-          <ul className="text-sm text-blue-800 space-y-2">
-            <li>• Go to <strong>https://vertex-capitalportifolio.vercel.app/admin</strong></li>
-            <li>• Login with your GitHub credentials</li>
-            <li>• Click "Portfolio Data" and edit allocations</li>
-            <li>• Changes will auto-rebuild and appear here within 1-2 minutes</li>
-          </ul>
-        </div>
       </div>
     </div>
   );
