@@ -10,6 +10,9 @@ import Page4LiquidityCash from './pages/Page4LiquidityCash';
 import Page5TacticalLog from './pages/Page5TacticalLog';
 import Page6Performance from './pages/Page6Performance';
 import Page7Compliance from './pages/Page7Compliance';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import Contact from './pages/Contact';
 
 const App: React.FC = () => {
   return (
@@ -28,6 +31,9 @@ const App: React.FC = () => {
               <Route path="/tactical-log" element={<Page5TacticalLog />} />
               <Route path="/performance" element={<Page6Performance />} />
               <Route path="/compliance" element={<Page7Compliance />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/contact" element={<Contact />} />
             </Routes>
           </main>
         </div>
