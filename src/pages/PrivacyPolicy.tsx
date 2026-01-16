@@ -38,7 +38,10 @@ const PrivacyPolicy: React.FC = () => {
           For questions about this course project, please contact the project team.
         </p>
         <p className="text-gray-700 dark:text-gray-300 mt-2">
-          Phone (Tanzania): <strong>+255 123 456 789</strong> (placeholder — you will edit)
+          Email: <strong>ibrahimndarifanye0025@gmail.com</strong>
+        </p>
+        <p className="text-gray-700 dark:text-gray-300 mt-2">
+          Phone (Tanzania): <strong>+255620400025</strong>
         </p>
       </div>
     </div>

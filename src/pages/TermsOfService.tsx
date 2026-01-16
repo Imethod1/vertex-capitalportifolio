@@ -40,7 +40,10 @@ const TermsOfService: React.FC = () => {
           Questions about these terms can be directed to the course project team.
         </p>
         <p className="text-gray-700 dark:text-gray-300 mt-2">
-          Phone (Tanzania): <strong>+255 123 456 789</strong> (placeholder — you will edit)
+          Email: <strong>ibrahimndarifanye0025@gmail.com</strong>
+        </p>
+        <p className="text-gray-700 dark:text-gray-300 mt-2">
+          Phone (Tanzania): <strong>+255620400025</strong>
         </p>
       </div>
     </div>

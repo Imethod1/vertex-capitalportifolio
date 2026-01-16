@@ -13,8 +13,8 @@ const Contact: React.FC = () => {
           <div className="bg-gray-50 dark:bg-gray-800 rounded p-4">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Project Team</h2>
             <ul className="text-gray-700 dark:text-gray-300 space-y-2 text-sm">
-              <li>• Email: <strong>project@example.com</strong> (placeholder)</li>
-              <li>• Phone (Tanzania): <strong>+255 123 456 789</strong> (placeholder — you will edit)</li>
+              <li>• Email: <strong>ibrahimndarifanye0025@gmail.com</strong></li>
+              <li>• Phone (Tanzania): <strong>+255</strong>620400025</li>
             </ul>
           </div>
           <div className="bg-gray-50 dark:bg-gray-800 rounded p-4">
