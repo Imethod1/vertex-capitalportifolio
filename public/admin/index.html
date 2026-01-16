@@ -5,36 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Vertex Capital - Portfolio Admin Panel</title>
+    <!-- Tell Decap CMS where to find config -->
+    <link href="config.yml" type="text/yaml" rel="cms-config-url">
   </head>
   <body>
     <!-- Decap CMS root container -->
     <div id="nc-root"></div>
 
-    <!-- Configure Decap CMS to find config in same directory -->
-    <script>
-      // Set config URL to look for config.yml in same directory as this file (/admin/)
-      window.CMS_MANUAL_INIT = true;
-      window.CMS_CONFIG_URL = './config.yml';
-    </script>
-
     <!-- Load Decap CMS from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
-
-    <!-- Initialize Decap CMS when loaded -->
-    <script>
-      (function initCMS() {
-        if (window.CMS && window.CMS.init) {
-          try {
-            window.CMS.init();
-            console.log('Decap CMS initialized successfully with config from: ./config.yml');
-          } catch (error) {
-            console.error('Error initializing Decap CMS:', error);
-          }
-        } else {
-          // Retry if CMS not ready
-          setTimeout(initCMS, 100);
-        }
-      })();
-    </script>
   </body>
 </html>
