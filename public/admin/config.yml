@@ -5,9 +5,6 @@ backend:
   base_url: https://vertex-capitalportifolio.vercel.app
   auth_endpoint: /api/auth
 
-# Require authentication for all users
-publish_mode: editorial_workflow
-
 media_folder: public/images
 public_folder: /images
 
