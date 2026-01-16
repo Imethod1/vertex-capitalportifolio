@@ -13,7 +13,8 @@ export default async (req, res) => {
   // Step 1: If no code, redirect to GitHub OAuth
   if (!code) {
     const redirectUri = `${req.headers.origin || 'https://vertex-capitalportifolio.vercel.app'}/api/auth`;
-    const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo,user`;
+    // Add prompt=login to force GitHub to ask for credentials
+    const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo,user&prompt=login`;
     
     console.log('Redirecting to GitHub:', githubAuthUrl);
     return res.redirect(githubAuthUrl);
