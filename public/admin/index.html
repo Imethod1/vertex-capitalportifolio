@@ -10,7 +10,13 @@
     <!-- Decap CMS root container -->
     <div id="nc-root"></div>
 
-    <!-- Decap CMS from CDN -->
+    <!-- Tell Decap CMS where to find the config file -->
+    <script>
+      window.CMS_MANUAL_INIT = true;
+      window.CMS_CONFIG_URL = '/admin/config.yml';
+    </script>
+
+    <!-- Load Decap CMS from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
   </body>
 </html>
