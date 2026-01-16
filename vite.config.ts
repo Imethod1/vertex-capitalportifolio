@@ -5,6 +5,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5174,
-    open: true
-  }
+    open: true,
+    fs: {
+      strict: false
+    }
+  },
+  publicDir: 'public'
 });

@@ -10,52 +10,7 @@
     <!-- Decap CMS root container -->
     <div id="nc-root"></div>
 
-    <!-- Decap CMS Configuration -->
-    <script>
-      // Manual initialization with custom config
-      window.CMS_MANUAL_INIT = true;
-      window.CMS_CONFIG_URL = '/admin/config.yml';
-    </script>
-
-    <!-- Load JS-YAML for parsing config -->
-    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-
-    <!-- Load Decap CMS from CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.js"></script>
-
-    <script>
-      // Initialize CMS when ready
-      (async function initCMS() {
-        // Wait for CMS to be available
-        while (!window.CMS) {
-          await new Promise(resolve => setTimeout(resolve, 100));
-        }
-        try {
-          // Fetch and parse YAML config
-          const configUrl = window.CMS_CONFIG_URL || '/admin/config.yml';
-          const response = await fetch(configUrl);
-          const yamlText = await response.text();
-          
-          // Parse YAML to JS object
-          const config = jsyaml.load(yamlText);
-          
-          // Initialize CMS with parsed config object
-          window.CMS.init({ config });
-        } catch (error) {
-          console.error('CMS initialization error:', error);
-          document.body.innerHTML = `
-            <div style="padding: 40px; font-family: sans-serif; text-align: center;">
-              <h1 style="color: #d32f2f;">CMS Initialization Error</h1>
-              <p style="margin-top: 20px; color: #666;">
-                ${error.message}
-              </p>
-              <p style="margin-top: 20px;">
-                <a href="/admin/" style="color: #1976d2;">Reload</a>
-              </p>
-            </div>
-          `;
-        }
-      })();
-    </script>
+    <!-- Decap CMS from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.min.js"></script>
   </body>
 </html>

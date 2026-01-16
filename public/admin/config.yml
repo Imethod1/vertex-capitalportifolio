@@ -193,7 +193,7 @@ collections:
         format: json
         fields:
           - label: Date
-            name: tacticaldDate
+            name: tacticalDate
             widget: datetime
             format: YYYY-MM-DD
           - label: Tactical Adjustments
