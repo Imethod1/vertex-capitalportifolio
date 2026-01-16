@@ -2,124 +2,46 @@ import React from 'react';
 
 const TermsOfService: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">Terms of Service</h1>
-        <div className="text-gray-700 space-y-6">
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Acceptance of Terms</h2>
-            <p>
-              By accessing and using the Vertex Capital Portfolio Management System, you agree to be bound by these Terms of Service. 
-              If you do not agree to these terms, please do not use this application. This is a course project for the Security Analysis 
-              and Portfolio Management program.
-            </p>
-          </section>
+    <div className="p-6 md:p-8">
+      <div className="bg-white dark:bg-gray-900 rounded-lg shadow border border-gray-200 dark:border-gray-800 p-6 md:p-8 max-w-4xl mx-auto">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Terms of Service</h1>
+        <p className="text-gray-600 dark:text-gray-400 mb-6">
+          These terms apply to the internal academic use of this application for the <strong>Security Analysis and Portfolio Management</strong> course project. By using this system, you agree to the following:
+        </p>
 
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Use License</h2>
-            <p>
-              Permission is granted to access this application solely for authorized users (collaborators on the GitHub repository). 
-              Unauthorized use of this system is prohibited. Users must not:
-            </p>
-            <ul className="list-disc list-inside space-y-2 mt-4">
-              <li>Modify or copy the application code without authorization</li>
-              <li>Use the system for purposes other than portfolio management</li>
-              <li>Attempt to gain unauthorized access to restricted areas</li>
-              <li>Transmit any harmful or malicious code</li>
-              <li>Violate any applicable laws or regulations</li>
-            </ul>
-          </section>
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Academic Use Only</h2>
+        <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 mb-6 space-y-2">
+          <li>The application is for learning and simulation purposes only.</li>
+          <li>No production trading or external client usage is permitted.</li>
+          <li>Access is limited to course participants and collaborators.</li>
+        </ul>
 
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">3. User Responsibilities</h2>
-            <ul className="list-disc list-inside space-y-2">
-              <li>You are responsible for maintaining the confidentiality of your GitHub credentials</li>
-              <li>You agree to provide accurate information about your portfolio and investments</li>
-              <li>You are responsible for all activities that occur under your account</li>
-              <li>You must immediately notify us of any unauthorized access to your account</li>
-              <li>You agree to comply with all applicable investment regulations and policies</li>
-            </ul>
-          </section>
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Data & Compliance</h2>
+        <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 mb-6 space-y-2">
+          <li>Data represents simulated or non-sensitive portfolio information.</li>
+          <li>Compliance checks follow an educational IPS framework.</li>
+          <li>Users must not upload personal or sensitive data to the system.</li>
+        </ul>
 
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Data Accuracy and Compliance</h2>
-            <p>
-              You acknowledge that portfolio data must be accurate and comply with the Investment Policy Statement (IPS). 
-              The system provides compliance monitoring tools, but you are ultimately responsible for ensuring all data is accurate 
-              and compliant with institutional policies.
-            </p>
-          </section>
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Authentication & Access</h2>
+        <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 mb-6 space-y-2">
+          <li>Admin access requires collaborator authentication (e.g., via GitHub OAuth).</li>
+          <li>Public users cannot modify data; the app is read-only to viewers.</li>
+          <li>All changes are versioned for audit and educational review.</li>
+        </ul>
 
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Audit Trails and Governance</h2>
-            <p>
-              This system maintains comprehensive audit trails of all changes to portfolio data. All decision logs and tactical adjustments 
-              must include appropriate documentation and approvals. Users agree to maintain proper governance and decision-making processes.
-            </p>
-          </section>
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Liability</h2>
+        <p className="text-gray-700 dark:text-gray-300 mb-6">
+          The project team and institution are not responsible for any decisions made based on the information presented. This is a learning tool only and not investment advice.
+        </p>
 
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">6. Disclaimer of Warranties</h2>
-            <p>
-              This application is provided on an "as is" and "as available" basis. We make no warranties, express or implied, regarding 
-              the application's fitness for a particular purpose, accuracy, or non-infringement. While we strive for data accuracy, we 
-              do not guarantee that all information will be error-free.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. Limitation of Liability</h2>
-            <p>
-              In no event shall Vertex Capital or its developers be liable for any indirect, incidental, special, consequential, or punitive 
-              damages resulting from your use of or inability to use the application, even if advised of the possibility of such damages.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Intellectual Property</h2>
-            <p>
-              All content, features, and functionality (including but not limited to all information, software, text, displays, images, 
-              video, and audio) are owned by Vertex Capital, its licensors, or other providers of such material and are protected by copyright, 
-              trademark, and other intellectual property laws.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">9. Termination</h2>
-            <p>
-              Access to this application may be terminated at any time by authorized administrators. Upon termination, all rights granted 
-              to you will immediately cease, and you must discontinue use of the application.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. Changes to Terms</h2>
-            <p>
-              We reserve the right to modify these Terms of Service at any time. Changes will be effective immediately upon posting to 
-              the application. Your continued use of the application following any such changes constitutes your acceptance of the new terms.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">11. Governing Law</h2>
-            <p>
-              These Terms of Service are governed by and construed in accordance with the laws applicable to educational institutions 
-              and are subject to any course regulations provided by the instructor.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">12. Contact</h2>
-            <p>
-              If you have questions about these Terms of Service, please contact us using the information provided in our Contact page.
-            </p>
-          </section>
-
-          <div className="mt-8 pt-8 border-t border-gray-200 text-sm text-gray-500">
-            <p>Effective Date: January 2026</p>
-            <p>Last Updated: January 16, 2026</p>
-          </div>
-        </div>
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Contact</h2>
+        <p className="text-gray-700 dark:text-gray-300">
+          Questions about these terms can be directed to the course project team.
+        </p>
+        <p className="text-gray-700 dark:text-gray-300 mt-2">
+          Phone (Tanzania): <strong>+255 123 456 789</strong> (placeholder — you will edit)
+        </p>
       </div>
     </div>
   );

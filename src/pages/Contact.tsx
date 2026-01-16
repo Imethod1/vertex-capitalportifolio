@@ -1,213 +1,51 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Form submission logic would go here
-    alert('Thank you for your message. We will get back to you soon.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
-  };
-
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
-          <p className="text-lg text-gray-600">
-            Get in touch with us for questions about the Portfolio Management System
-          </p>
-        </div>
+    <div className="p-6 md:p-8">
+      <div className="bg-white dark:bg-gray-900 rounded-lg shadow border border-gray-200 dark:border-gray-800 p-6 md:p-8 max-w-3xl mx-auto">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Contact</h1>
+        <p className="text-gray-600 dark:text-gray-400 mb-6">
+          This application is a course project for <strong>Security Analysis and Portfolio Management</strong>. For questions related to the project or collaboration, use the contact information below.
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Contact Information */}
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Contact Information</h2>
-            
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">Email</h3>
-                <p className="text-gray-600">
-                  <a href="mailto:support@vertexcapital.com" className="text-blue-600 hover:text-blue-800">
-                    support@vertexcapital.com
-                  </a>
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">Phone</h3>
-                <p className="text-gray-600">
-                  <a href="tel:+255123456789" className="text-blue-600 hover:text-blue-800">
-                    +255 123 456 789
-                  </a>
-                </p>
-                <p className="text-sm text-gray-500 mt-1">(Tanzania)</p>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">Location</h3>
-                <p className="text-gray-600">
-                  Dar es Salaam, Tanzania
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">Course Project</h3>
-                <p className="text-gray-600">
-                  Security Analysis and Portfolio Management
-                </p>
-              </div>
-
-              <div className="pt-6 border-t border-gray-200">
-                <h3 className="font-semibold text-gray-900 mb-4">Office Hours</h3>
-                <ul className="text-gray-600 space-y-1 text-sm">
-                  <li>Monday - Friday: 9:00 AM - 5:00 PM</li>
-                  <li>Saturday - Sunday: Closed</li>
-                  <li>Response time: Within 24 hours</li>
-                </ul>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div className="bg-gray-50 dark:bg-gray-800 rounded p-4">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Project Team</h2>
+            <ul className="text-gray-700 dark:text-gray-300 space-y-2 text-sm">
+              <li>• Email: <strong>project@example.com</strong> (placeholder)</li>
+              <li>• Phone (Tanzania): <strong>+255 123 456 789</strong> (placeholder — you will edit)</li>
+            </ul>
           </div>
-
-          {/* Contact Form */}
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Send us a Message</h2>
-            
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Your name"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="How can we help?"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Please provide details about your inquiry..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-              >
-                Send Message
-              </button>
-            </form>
+          <div className="bg-gray-50 dark:bg-gray-800 rounded p-4">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Course Context</h2>
+            <ul className="text-gray-700 dark:text-gray-300 space-y-2 text-sm">
+              <li>• Educational, not production use</li>
+              <li>• Simulated portfolio data</li>
+              <li>• Internal collaborators only</li>
+            </ul>
           </div>
         </div>
 
-        {/* FAQ Section */}
-        <div className="mt-12 bg-white rounded-lg shadow-lg p-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Frequently Asked Questions</h2>
-          
-          <div className="space-y-6">
+        <div className="bg-gray-50 dark:bg-gray-800 rounded p-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Quick Message</h2>
+          <form className="space-y-4">
             <div>
-              <h3 className="font-semibold text-gray-900 mb-2">How do I access the admin panel?</h3>
-              <p className="text-gray-600">
-                Only collaborators on the GitHub repository have access to the admin panel. 
-                Contact your project administrator for access.
-              </p>
+              <label className="block text-sm text-gray-700 dark:text-gray-300 mb-1">Your Name</label>
+              <input type="text" className="w-full rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2" placeholder="Your name" />
             </div>
-
             <div>
-              <h3 className="font-semibold text-gray-900 mb-2">How often is data updated?</h3>
-              <p className="text-gray-600">
-                Portfolio data is updated through the Decap CMS admin panel. Changes appear 
-                in the public dashboard within 1-2 minutes.
-              </p>
+              <label className="block text-sm text-gray-700 dark:text-gray-300 mb-1">Email</label>
+              <input type="email" className="w-full rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2" placeholder="you@example.com" />
             </div>
-
             <div>
-              <h3 className="font-semibold text-gray-900 mb-2">What is the Investment Policy Statement (IPS)?</h3>
-              <p className="text-gray-600">
-                The IPS defines the investment strategy, allocation targets, risk limits, and 
-                compliance rules for the portfolio. All allocations must comply with IPS limits.
-              </p>
+              <label className="block text-sm text-gray-700 dark:text-gray-300 mb-1">Message</label>
+              <textarea className="w-full rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2" rows={4} placeholder="Write your message (no backend submission)"></textarea>
             </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">How is security ensured?</h3>
-              <p className="text-gray-600">
-                We use GitHub OAuth for authentication, maintain comprehensive audit trails, 
-                and enforce role-based access control. All data is encrypted in transit and at rest.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">What if I find a bug or security issue?</h3>
-              <p className="text-gray-600">
-                Please report security issues directly to us via email. Include detailed information 
-                about the issue and steps to reproduce it.
-              </p>
-            </div>
-          </div>
+            <button type="button" className="inline-flex items-center px-4 py-2 rounded bg-gray-900 text-white hover:bg-gray-700">
+              Save (Mock)
+            </button>
+          </form>
         </div>
       </div>
     </div>
