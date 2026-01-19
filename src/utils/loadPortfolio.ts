@@ -132,8 +132,21 @@ export const checkSecurityCompliance = (securities: Security[]): {
 } => {
   const breaches: string[] = [];
 
-  // Check individual security limit (≤10%)
-  const oversizedSecurities = securities.filter((s) => s.currentWeight > 10);
+  // Limits (align with IPS):
+  // - Single security: 10%, except Government Fixed Income (≤50%)
+  // - Sector: 25%
+  // - Regional allocation: Regional (EAC/SADC) exposure ≤10%
+  const SINGLE_SECURITY_LIMIT = 10;
+  const GOVT_SINGLE_SECURITY_LIMIT = 50;
+  const SECTOR_LIMIT = 25;
+  const REGIONAL_LIMIT = 10;
+
+  // Check individual security limit (context-aware)
+  const oversizedSecurities = securities.filter((s) => {
+    const isGovtFixedIncome = s.sector === 'Government' && s.assetClass === 'Fixed Income';
+    const limit = isGovtFixedIncome ? GOVT_SINGLE_SECURITY_LIMIT : SINGLE_SECURITY_LIMIT;
+    return s.currentWeight > limit;
+  });
   if (oversizedSecurities.length > 0) {
     breaches.push(
       `Single security limit breached: ${oversizedSecurities.map((s) => `${s.ticker} (${s.currentWeight.toFixed(2)}%)`).join(', ')}`
@@ -146,24 +159,19 @@ export const checkSecurityCompliance = (securities: Security[]): {
     sectorWeights[s.sector] = (sectorWeights[s.sector] || 0) + s.currentWeight;
   });
 
-  const oversizedSectors = Object.entries(sectorWeights).filter(([_, weight]) => weight > 25);
+  const oversizedSectors = Object.entries(sectorWeights).filter(([_, weight]) => weight > SECTOR_LIMIT);
   if (oversizedSectors.length > 0) {
     breaches.push(
       `Sector limit breached: ${oversizedSectors.map(([sector, weight]) => `${sector} (${weight.toFixed(2)}%)`).join(', ')}`
     );
   }
 
-  // Check regional limit (≤10%)
-  const regionalWeights: { [key: string]: number } = {};
-  securities.forEach((s) => {
-    regionalWeights[s.geographicExposure] = (regionalWeights[s.geographicExposure] || 0) + s.currentWeight;
-  });
-
-  const oversizedRegions = Object.entries(regionalWeights).filter(([_, weight]) => weight > 10);
-  if (oversizedRegions.length > 0) {
-    breaches.push(
-      `Regional limit breached: ${oversizedRegions.map(([region, weight]) => `${region} (${weight.toFixed(2)}%)`).join(', ')}`
-    );
+  // Check regional allocation limit (only for Regional bucket, not domestic)
+  const regionalExposure = securities
+    .filter((s) => s.assetClass === 'Regional (EAC/SADC) Equities')
+    .reduce((sum, s) => sum + s.currentWeight, 0);
+  if (regionalExposure > REGIONAL_LIMIT) {
+    breaches.push(`Regional allocation limit breached: Regional (EAC/SADC) Equities (${regionalExposure.toFixed(2)}%)`);
   }
 
   return {
