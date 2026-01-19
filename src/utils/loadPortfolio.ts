@@ -13,9 +13,9 @@ export const loadPortfolioData = async (): Promise<PortfolioState> => {
     if (portfolioData && portfolioData.date) {
       const allocations = (portfolioData.allocations || []).map((alloc: any) => ({
         assetClass: alloc.assetClass || '',
-        target: alloc.targetPercent || 0,
-        current: alloc.currentPercent || 0,
-        deviation: alloc.deviationPercent || 0,
+        target: alloc.target || alloc.targetPercent || 0,
+        current: alloc.current || alloc.currentPercent || 0,
+        deviation: alloc.deviation || alloc.deviationPercent || 0,
         rebalancingRequired: alloc.rebalancingRequired || false,
         notes: alloc.notes || '',
       }));
