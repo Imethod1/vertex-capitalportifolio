@@ -1,29 +1,45 @@
 {
-  "date": "2026-01-12",
+  "date": "2026-03-28",
   "liquidityItems": [
     {
       "item": "Cash & Cash Equivalents",
       "minimum": 10,
       "maximum": 15,
-      "current": 0,
+      "current": 9.3,
       "status": "Adequate",
-      "actionNeeded": "Monitor weekly"
+      "actionNeeded": "Monitor - slightly below minimum but operational"
     },
     {
-      "item": "Time to Liquidate 80% Portfolio",
-      "minimum": 0,
-      "maximum": 30,
-      "current": 0,
+      "item": "Time to Liquidate 80%",
+      "minimum": null,
+      "maximum": "≤30 days",
+      "current": "15 days",
       "status": "Adequate",
-      "actionNeeded": "Monitor liquidity conditions"
+      "actionNeeded": "None"
     },
     {
-      "item": "Bid-Ask Spread / Daily Volume",
-      "minimum": 0,
-      "maximum": 0,
-      "current": 0,
+      "item": "Bid-Ask Spread (Equities)",
+      "minimum": null,
+      "maximum": "≤2%",
+      "current": "1.5% average",
       "status": "Adequate",
-      "actionNeeded": "Monitor execution efficiency"
+      "actionNeeded": "None"
+    },
+    {
+      "item": "Daily Trading Volume Coverage",
+      "minimum": "≥3 days",
+      "maximum": null,
+      "current": "7.2 days",
+      "status": "Adequate",
+      "actionNeeded": "None"
+    },
+    {
+      "item": "Cash Buffer for Tactical Moves",
+      "minimum": "2%",
+      "maximum": null,
+      "current": "1.5%",
+      "status": "Warning",
+      "actionNeeded": "Consider raising cash from matured T-bill"
     }
   ]
 }

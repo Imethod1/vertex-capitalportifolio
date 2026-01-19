@@ -1,47 +1,61 @@
 {
-  "date": "2026-01-12",
+  "date": "2026-03-31",
   "complianceChecks": [
     {
       "area": "Single Security Limit",
       "ipsLimit": "≤10%",
-      "currentStatus": "Compliant",
+      "currentStatus": "8.3% max",
       "breach": false,
-      "actionRequired": ""
+      "actionRequired": "None"
     },
     {
       "area": "Single Sector Limit",
       "ipsLimit": "≤25%",
-      "currentStatus": "Compliant",
+      "currentStatus": "22.1%",
       "breach": false,
-      "actionRequired": ""
+      "actionRequired": "None"
     },
     {
-      "area": "Regional Allocation Limit",
+      "area": "Regional Allocation",
       "ipsLimit": "≤10%",
-      "currentStatus": "Compliant",
+      "currentStatus": "5.4%",
       "breach": false,
-      "actionRequired": ""
+      "actionRequired": "None"
     },
     {
       "area": "Drawdown Limit",
       "ipsLimit": "≤5%",
-      "currentStatus": "Compliant",
+      "currentStatus": "3.1%",
       "breach": false,
-      "actionRequired": ""
+      "actionRequired": "None"
     },
     {
       "area": "Prohibited Instruments",
       "ipsLimit": "None",
-      "currentStatus": "Compliant",
+      "currentStatus": "0 holdings",
       "breach": false,
-      "actionRequired": ""
+      "actionRequired": "None"
     },
     {
-      "area": "Credit Rating Compliance",
-      "ipsLimit": "≥Investment Grade",
-      "currentStatus": "Compliant",
+      "area": "Credit Quality",
+      "ipsLimit": "≥ Investment Grade",
+      "currentStatus": "100% compliant",
       "breach": false,
-      "actionRequired": ""
+      "actionRequired": "None"
+    },
+    {
+      "area": "Liquidity Requirements",
+      "ipsLimit": "≥80% liquid in 30 days",
+      "currentStatus": "92% liquid",
+      "breach": false,
+      "actionRequired": "None"
+    },
+    {
+      "area": "Regulatory Compliance",
+      "ipsLimit": "CMSA & BoT rules",
+      "currentStatus": "Fully compliant",
+      "breach": false,
+      "actionRequired": "None"
     }
   ]
 }

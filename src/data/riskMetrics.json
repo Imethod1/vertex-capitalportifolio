@@ -1,25 +1,61 @@
 {
+  "date": "2026-03-31",
   "metrics": [
     {
       "metricName": "Single Security Exposure",
-      "ipsLimit": "≤10%",
-      "currentValue": "0%",
+      "ipsLimit": "≤10% (govt ≤50%)",
+      "currentValue": "8.3% (Govt Bond)",
       "metricStatus": "Compliant",
-      "actionRequired": ""
+      "actionRequired": "None"
     },
     {
       "metricName": "Single Sector Exposure",
       "ipsLimit": "≤25%",
-      "currentValue": "0%",
+      "currentValue": "22.1% (Banking)",
       "metricStatus": "Compliant",
-      "actionRequired": ""
+      "actionRequired": "None"
     },
     {
-      "metricName": "International Equity Exposure",
-      "ipsLimit": "≤15%",
-      "currentValue": "0%",
+      "metricName": "Regional Allocation",
+      "ipsLimit": "≤10%",
+      "currentValue": "5.4%",
       "metricStatus": "Compliant",
-      "actionRequired": ""
+      "actionRequired": "None"
+    },
+    {
+      "metricName": "Portfolio Duration",
+      "ipsLimit": "≤2 years",
+      "currentValue": "1.8 years",
+      "metricStatus": "Compliant",
+      "actionRequired": "None"
+    },
+    {
+      "metricName": "Portfolio Volatility",
+      "ipsLimit": "5–7% p.a.",
+      "currentValue": "6.0% p.a.",
+      "metricStatus": "Compliant",
+      "actionRequired": "None"
+    },
+    {
+      "metricName": "Maximum Drawdown",
+      "ipsLimit": "≤5%",
+      "currentValue": "3.1%",
+      "metricStatus": "Compliant",
+      "actionRequired": "None"
+    },
+    {
+      "metricName": "Credit Rating Compliance",
+      "ipsLimit": "≥ Investment Grade",
+      "currentValue": "100% compliant",
+      "metricStatus": "Compliant",
+      "actionRequired": "None"
+    },
+    {
+      "metricName": "Interest Rate Sensitivity",
+      "ipsLimit": "100bps increase test",
+      "currentValue": "-1.2% impact",
+      "metricStatus": "Compliant",
+      "actionRequired": "None"
     }
   ]
 }

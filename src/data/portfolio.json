@@ -1,89 +1,172 @@
 {
-  "date": "2026-01-12",
+  "date": "2026-03-31",
+  "totalValue": 103870200,
   "allocations": [
     {
       "assetClass": "Fixed Income",
       "target": 50,
-      "current": 0,
-      "deviation": 0,
+      "current": 49.5,
+      "deviation": -0.5,
       "rebalancingRequired": false,
-      "notes": "Government and investment-grade corporate bonds"
+      "notes": "Final position - within ±3% limit"
     },
     {
-      "assetClass": "Domestic Equities",
+      "assetClass": "Domestic Equities (DSE)",
       "target": 35,
-      "current": 0,
-      "deviation": 0,
+      "current": 35.8,
+      "deviation": 0.8,
       "rebalancingRequired": false,
-      "notes": "DSE-listed equities"
+      "notes": "End Q1 with solid equity performance"
     },
     {
       "assetClass": "Regional (EAC/SADC) Equities",
       "target": 5,
-      "current": 0,
-      "deviation": 0,
+      "current": 5.4,
+      "deviation": 0.4,
       "rebalancingRequired": false,
-      "notes": "Large-cap liquid issuers"
+      "notes": "Safaricom outperformed expectations"
     },
     {
       "assetClass": "Cash & Cash Equivalents",
       "target": 10,
-      "current": 0,
-      "deviation": 0,
+      "current": 9.3,
+      "deviation": -0.7,
       "rebalancingRequired": false,
-      "notes": "Treasury bills and bank deposits"
+      "notes": "T-bill matured, funds reinvested"
     }
   ],
-  "securities": [],
+  "securities": [
+    {
+      "id": "F001",
+      "name": "Government of Tanzania 2-Year Bond",
+      "ticker": "GOTZ2Y",
+      "assetClass": "Fixed Income",
+      "currentWeight": 24.8,
+      "targetWeight": 25,
+      "deviation": -0.2,
+      "sector": "Government",
+      "geographicExposure": "Tanzania",
+      "marketValue": 24800000,
+      "quantity": 24000,
+      "purchasePrice": 1000,
+      "currentPrice": 1033.33,
+      "notes": "Coupon payments received, price appreciated slightly",
+      "ipsCompliant": true
+    },
+    {
+      "id": "F002",
+      "name": "CRDB Bank Bond",
+      "ticker": "CRDBB2028",
+      "assetClass": "Fixed Income",
+      "currentWeight": 24.7,
+      "targetWeight": 25,
+      "deviation": -0.3,
+      "sector": "Banking",
+      "geographicExposure": "Tanzania",
+      "marketValue": 24700000,
+      "quantity": 24500,
+      "purchasePrice": 990,
+      "currentPrice": 1008.16,
+      "notes": "BBB+ rating maintained, steady performance",
+      "ipsCompliant": true
+    },
+    {
+      "id": "E001",
+      "name": "Tanzania Breweries Ltd",
+      "ticker": "TBL",
+      "assetClass": "Domestic Equities (DSE)",
+      "currentWeight": 15.5,
+      "targetWeight": 15,
+      "deviation": 0.5,
+      "sector": "Consumer Goods",
+      "geographicExposure": "Tanzania",
+      "marketValue": 15500000,
+      "quantity": 50000,
+      "purchasePrice": 300,
+      "currentPrice": 310,
+      "notes": "Dividend yield 5.2%, quarterly dividend paid",
+      "ipsCompliant": true
+    },
+    {
+      "id": "E002",
+      "name": "NMB Bank Plc",
+      "ticker": "NMB",
+      "assetClass": "Domestic Equities (DSE)",
+      "currentWeight": 15.3,
+      "targetWeight": 15,
+      "deviation": 0.3,
+      "sector": "Banking",
+      "geographicExposure": "Tanzania",
+      "marketValue": 15300000,
+      "quantity": 100000,
+      "purchasePrice": 150,
+      "currentPrice": 153,
+      "notes": "Strong Q1 results, dividend declared",
+      "ipsCompliant": true
+    },
+    {
+      "id": "E003",
+      "name": "Safaricom PLC",
+      "ticker": "SCOM",
+      "assetClass": "Regional (EAC/SADC) Equities",
+      "currentWeight": 5.4,
+      "targetWeight": 5,
+      "deviation": 0.4,
+      "sector": "Telecommunications",
+      "geographicExposure": "Kenya",
+      "marketValue": 5400000,
+      "quantity": 20000,
+      "purchasePrice": 260,
+      "currentPrice": 270,
+      "notes": "M-Pesa revenue growth, currency conversion stable",
+      "ipsCompliant": true
+    },
+    {
+      "id": "C001",
+      "name": "91-day Treasury Bill",
+      "ticker": "TBILL91",
+      "assetClass": "Cash & Cash Equivalents",
+      "currentWeight": 9.3,
+      "targetWeight": 10,
+      "deviation": -0.7,
+      "sector": "Government",
+      "geographicExposure": "Tanzania",
+      "marketValue": 9300000,
+      "quantity": 9300000,
+      "purchasePrice": 100,
+      "currentPrice": 100,
+      "notes": "Matured March 28, interest earned 7.8% annualized",
+      "ipsCompliant": true
+    }
+  ],
   "riskMetrics": [
     {
       "metric": "Single Security Exposure",
-      "ipsLimit": "≤10%",
-      "currentValue": "0%",
+      "ipsLimit": "≤10% (govt ≤50%)",
+      "currentValue": "8.3% (Govt Bond)",
       "status": "Compliant",
-      "actionRequired": ""
+      "actionRequired": "None"
     },
     {
       "metric": "Single Sector Exposure",
       "ipsLimit": "≤25%",
-      "currentValue": "0%",
+      "currentValue": "22.1% (Banking)",
       "status": "Compliant",
-      "actionRequired": ""
-    },
-    {
-      "metric": "Regional Allocation",
-      "ipsLimit": "≤10%",
-      "currentValue": "0%",
-      "status": "Compliant",
-      "actionRequired": ""
-    },
-    {
-      "metric": "Weighted Portfolio Duration",
-      "ipsLimit": "≤2 yrs",
-      "currentValue": "0 yrs",
-      "status": "Compliant",
-      "actionRequired": ""
+      "actionRequired": "None"
     },
     {
       "metric": "Portfolio Volatility",
-      "ipsLimit": "5-7% ann.",
-      "currentValue": "0%",
+      "ipsLimit": "5–7% p.a.",
+      "currentValue": "6.0% p.a.",
       "status": "Compliant",
-      "actionRequired": ""
+      "actionRequired": "None"
     },
     {
-      "metric": "Drawdown Limit",
+      "metric": "Maximum Drawdown",
       "ipsLimit": "≤5%",
-      "currentValue": "0%",
+      "currentValue": "3.1%",
       "status": "Compliant",
-      "actionRequired": ""
-    },
-    {
-      "metric": "Credit Rating Compliance",
-      "ipsLimit": "≥Investment Grade",
-      "currentValue": "N/A",
-      "status": "Compliant",
-      "actionRequired": ""
+      "actionRequired": "None"
     }
   ],
   "liquidityItems": [
@@ -91,100 +174,82 @@
       "item": "Cash & Cash Equivalents",
       "minimum": 10,
       "maximum": 15,
-      "current": 0,
+      "current": 9.3,
       "status": "Adequate",
-      "actionNeeded": "Monitor weekly"
+      "actionNeeded": "Monitor - slightly below minimum but operational"
     },
     {
-      "item": "Time to Liquidate 80% Portfolio",
-      "minimum": 0,
-      "maximum": 30,
-      "current": 0,
+      "item": "Time to Liquidate 80%",
+      "minimum": null,
+      "maximum": "≤30 days",
+      "current": "15 days",
       "status": "Adequate",
-      "actionNeeded": "Monitor liquidity conditions"
-    },
-    {
-      "item": "Bid-Ask Spread / Daily Volume",
-      "minimum": 0,
-      "maximum": 0,
-      "current": 0,
-      "status": "Adequate",
-      "actionNeeded": "Monitor execution efficiency"
+      "actionNeeded": "None"
     }
   ],
-  "tacticalAdjustments": [],
+  "tacticalAdjustments": [
+    {
+      "id": "TA004",
+      "date": "2026-03-28",
+      "tacticalMove": "Rebalanced to SAA targets",
+      "deviationPercent": 0,
+      "marketSignal": "End of quarter rebalancing",
+      "duration": "Permanent",
+      "approvedBy": "IC",
+      "notes": "Brought allocations within ±3% of targets for quarter-end"
+    }
+  ],
   "performanceMetrics": [
     {
       "metric": "Total Portfolio Return",
-      "target": "2-3% (Q1 target)",
-      "current": "0%",
-      "deviation": "0%",
-      "notes": "Target annualized return: 8-12%"
+      "target": "2.5%",
+      "current": "3.87%",
+      "deviation": "+1.37%",
+      "notes": "Exceeded IPS target by significant margin"
     },
     {
-      "metric": "Asset Class Returns",
-      "target": "Per allocation",
-      "current": "0%",
-      "deviation": "0%",
-      "notes": "Monitor each asset class separately"
+      "metric": "Benchmark Relative Return",
+      "target": "0%",
+      "current": "+1.46%",
+      "deviation": "+1.46%",
+      "notes": "Positive alpha generation"
     },
     {
-      "metric": "Benchmark-relative Return",
-      "target": "Composite Index",
-      "current": "0%",
-      "deviation": "0%",
-      "notes": "35% DSE + 5% Regional + 50% Gov Bonds + 10% T-bill"
-    },
-    {
-      "metric": "Risk-adjusted Metrics",
-      "target": "Sharpe & Sortino Ratio",
-      "current": "0",
-      "deviation": "0",
-      "notes": "Calculate monthly"
+      "metric": "Income Generated",
+      "target": "≥2.0%",
+      "current": "2.2%",
+      "deviation": "+0.2%",
+      "notes": "Dividends and coupons exceeded expectations"
     }
   ],
   "complianceChecks": [
     {
       "area": "Single Security Limit",
       "ipsLimit": "≤10%",
-      "currentStatus": "Compliant",
+      "currentStatus": "8.3% max",
       "breach": false,
-      "actionRequired": ""
+      "actionRequired": "None"
     },
     {
       "area": "Single Sector Limit",
       "ipsLimit": "≤25%",
-      "currentStatus": "Compliant",
+      "currentStatus": "22.1%",
       "breach": false,
-      "actionRequired": ""
-    },
-    {
-      "area": "Regional Allocation Limit",
-      "ipsLimit": "≤10%",
-      "currentStatus": "Compliant",
-      "breach": false,
-      "actionRequired": ""
+      "actionRequired": "None"
     },
     {
       "area": "Drawdown Limit",
       "ipsLimit": "≤5%",
-      "currentStatus": "Compliant",
+      "currentStatus": "3.1%",
       "breach": false,
-      "actionRequired": ""
+      "actionRequired": "None"
     },
     {
-      "area": "Prohibited Instruments",
-      "ipsLimit": "None",
-      "currentStatus": "Compliant",
+      "area": "Credit Quality",
+      "ipsLimit": "≥ Investment Grade",
+      "currentStatus": "100% compliant",
       "breach": false,
-      "actionRequired": ""
-    },
-    {
-      "area": "Credit Rating Compliance",
-      "ipsLimit": "≥Investment Grade",
-      "currentStatus": "Compliant",
-      "breach": false,
-      "actionRequired": ""
+      "actionRequired": "None"
     }
   ]
 }

@@ -1,4 +1,62 @@
-{
-  "date": "2026-01-12",
-  "tacticalAdjustments": []
-}
+[
+  {
+    "date": "2026-01-15",
+    "tacticalAdjustments": [
+      {
+        "id": "TA001",
+        "date": "2026-01-15",
+        "tacticalMove": "Increased TBL position",
+        "deviationPercent": 1.2,
+        "marketSignal": "Strong Q4 earnings, attractive valuation",
+        "duration": "2 weeks",
+        "approvedBy": "IC",
+        "notes": "Temporary overweight in consumer goods sector"
+      }
+    ]
+  },
+  {
+    "date": "2026-02-10",
+    "tacticalAdjustments": [
+      {
+        "id": "TA002",
+        "date": "2026-02-10",
+        "tacticalMove": "Reduced cash, increased bonds",
+        "deviationPercent": -1.5,
+        "marketSignal": "T-bill rates stable, credit spreads attractive",
+        "duration": "Indefinite",
+        "approvedBy": "PM",
+        "notes": "Reallocation within fixed income bucket"
+      }
+    ]
+  },
+  {
+    "date": "2026-03-05",
+    "tacticalAdjustments": [
+      {
+        "id": "TA003",
+        "date": "2026-03-05",
+        "tacticalMove": "Trimmed NMB position",
+        "deviationPercent": -0.8,
+        "marketSignal": "Profit taking after strong rally",
+        "duration": "1 week",
+        "approvedBy": "PM",
+        "notes": "Locked in gains, maintained sector exposure"
+      }
+    ]
+  },
+  {
+    "date": "2026-03-28",
+    "tacticalAdjustments": [
+      {
+        "id": "TA004",
+        "date": "2026-03-28",
+        "tacticalMove": "Rebalanced to SAA targets",
+        "deviationPercent": 0,
+        "marketSignal": "End of quarter rebalancing",
+        "duration": "Permanent",
+        "approvedBy": "IC",
+        "notes": "Brought allocations within ±3% of targets for quarter-end"
+      }
+    ]
+  }
+]
