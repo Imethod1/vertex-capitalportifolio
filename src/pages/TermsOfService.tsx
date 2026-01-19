@@ -18,7 +18,7 @@ const TermsOfService: React.FC = () => {
 
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Data & Compliance</h2>
         <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 mb-6 space-y-2">
-          <li>Data represents simulated or non-sensitive portfolio information.</li>
+          <li>Data represents assumed or non-sensitive portfolio information.</li>
           <li>Compliance checks follow an educational IPS framework.</li>
           <li>Users must not upload personal or sensitive data to the system.</li>
         </ul>

@@ -56,7 +56,7 @@ const Contact: React.FC = () => {
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Course Context</h2>
             <ul className="text-gray-700 dark:text-gray-300 space-y-2 text-sm">
               <li>• Educational, not production use</li>
-              <li>• Simulated portfolio data</li>
+              <li>• Assumed portfolio data</li>
               <li>• Internal collaborators only</li>
             </ul>
           </div>

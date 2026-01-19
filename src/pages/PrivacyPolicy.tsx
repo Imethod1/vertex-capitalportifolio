@@ -6,12 +6,12 @@ const PrivacyPolicy: React.FC = () => {
       <div className="bg-white dark:bg-gray-900 rounded-lg shadow border border-gray-200 dark:border-gray-800 p-6 md:p-8 max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Privacy Policy</h1>
         <p className="text-gray-600 dark:text-gray-400 mb-6">
-          This application is an academic course project for <strong>Security Analysis and Portfolio Management</strong>. It is intended solely for internal use by project participants to manage and analyze a simulated investment portfolio.
+          This application is an academic course project for <strong>Security Analysis and Portfolio Management</strong>. It is intended solely for internal use by project participants to manage and analyze an assumed investment portfolio.
         </p>
 
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Data We Use</h2>
         <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 mb-6 space-y-2">
-          <li>Portfolio positions, allocations, liquidity, and performance metrics (simulated or non-sensitive).</li>
+          <li>Portfolio positions, allocations, liquidity, and performance metrics (assumed or non-sensitive).</li>
           <li>Risk metrics and compliance checks aligned with an educational IPS framework.</li>
           <li>No collection of personal data from public users; only collaborators may authenticate via GitHub for admin access.</li>
         </ul>
