@@ -11,7 +11,7 @@
         "notes": "Initial allocation per SAA"
       },
       {
-        "assetClass": "Domestic Equities (DSE)",
+        "assetClass": "Domestic Equities",
         "target": 35,
         "current": 35,
         "deviation": 0,
@@ -48,7 +48,7 @@
         "notes": "Minor drift due to equity appreciation"
       },
       {
-        "assetClass": "Domestic Equities (DSE)",
+        "assetClass": "Domestic Equities",
         "target": 35,
         "current": 36.8,
         "deviation": 1.8,
@@ -85,7 +85,7 @@
         "notes": "Within acceptable range"
       },
       {
-        "assetClass": "Domestic Equities (DSE)",
+        "assetClass": "Domestic Equities",
         "target": 35,
         "current": 36.5,
         "deviation": 1.5,
@@ -122,7 +122,7 @@
         "notes": "Final position - within ±3% limit"
       },
       {
-        "assetClass": "Domestic Equities (DSE)",
+        "assetClass": "Domestic Equities",
         "target": 35,
         "current": 35.8,
         "deviation": 0.8,

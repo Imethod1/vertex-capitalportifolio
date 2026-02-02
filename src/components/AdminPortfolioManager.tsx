@@ -65,13 +65,17 @@ export const AdminPortfolioManager: React.FC<AdminProps> = ({ onSavePortfolio })
     const loadPortfolio = async () => {
       try {
         // Merge all data sources into a combined portfolio state
+        // Extract allocations from the latest entry in the array
+        const latestAllocations = (Array.isArray(allocationsData) ? allocationsData[allocationsData.length - 1] : allocationsData);
+        const latestTactical = (Array.isArray(tacticalData) ? tacticalData[tacticalData.length - 1] : tacticalData);
+        
         const mergedPortfolio: PortfolioState = {
           date: portfolioData.date,
-          allocations: allocationsData.allocations as PortfolioAllocation[],
-          securities: securitiesData.securities,
+          allocations: latestAllocations.allocations as PortfolioAllocation[],
+          securities: securitiesData.securities as Security[],
           riskMetrics: portfolioData.riskMetrics as RiskMetric[],
           liquidityItems: liquidityData.liquidityItems as LiquidityItem[],
-          tacticalAdjustments: tacticalData.tacticalAdjustments,
+          tacticalAdjustments: latestTactical.tacticalAdjustments,
           performanceMetrics: performanceData.performanceMetrics,
           complianceChecks: complianceData.complianceChecks,
         };

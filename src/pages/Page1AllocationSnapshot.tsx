@@ -15,12 +15,12 @@ const Page1AllocationSnapshot: React.FC = () => {
       notes: 'Final position - within ±3% limit',
     },
     {
-      assetClass: 'Domestic Equities (DSE)',
+      assetClass: 'Domestic Equities',
       target: 35,
       current: 35.8,
       deviation: 0.8,
       rebalancingRequired: false,
-      notes: 'End Q1 with solid equity performance',
+      notes: 'End Q1 with solid equity performance (DSE)',
     },
     {
       assetClass: 'Regional (EAC/SADC) Equities',
